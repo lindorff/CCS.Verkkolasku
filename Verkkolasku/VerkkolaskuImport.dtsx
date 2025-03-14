@@ -1,0 +1,1687 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/10/2017 8:41:00 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LTR900KXKH"
+  DTS:CreatorName="GROUPAD1\kaijahe"
+  DTS:DTSID="{8E1CC51C-03D5-4C3D-91AB-79909E4C863D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1035"
+  DTS:ObjectName="VerkkolaskuImport"
+  DTS:PackageType="5"
+  DTS:VersionBuild="101"
+  DTS:VersionGUID="{F98FA69A-716F-4579-9B98-1F32C91A378D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3117858B-37BD-407E-B3EE-86938C3152B7}"
+      DTS:ObjectName="AG-ODS-PROD.CCS_OPERATIONAL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=lwsqltst012;Initial Catalog=CCS_OPERATIONAL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-VerkkolaskuImport-{3117858B-37BD-407E-B3EE-86938C3152B7}AG-ODS-PROD.CCS_OPERATIONAL;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FI422HELSDB012.PaymentToolMemoTest_Jemma]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4A04A30C-AF74-4DF6-9232-37B54C3F7699}"
+      DTS:ObjectName="FI422HELSDB012.PaymentToolMemoTest_Jemma">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=FI422HELSDB012;Initial Catalog=PaymentToolMemoTest;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[InputFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{61658136-3AC2-4476-9A9A-5840C40164C2}"
+      DTS:ObjectName="InputFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="300"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Yrityksen nimi&quot;"
+              DTS:DTSID="{ADC2C37D-D009-4D39-A211-D6164653A2BB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Y-tunnus&quot;"
+              DTS:DTSID="{589F7C2F-BB87-4DC6-9849-A8DC9D187E17}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Operaattori&quot;"
+              DTS:DTSID="{2D090B83-52BF-4B44-89CA-AE49783254E7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Lähettää&quot;"
+              DTS:DTSID="{30BDB929-53A2-4BB6-AB51-CBDD08AD23B1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Vastaanottaa&quot;"
+              DTS:DTSID="{54574B75-1333-494F-9645-E9E7FA3E1A78}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Vastaanotto-osoite&quot;"
+              DTS:DTSID="{EF7BA457-91BF-46A7-9543-3F865B9BEC4C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Muokattu&quot;"
+              DTS:DTSID="{A9CDB1BF-017B-4333-B63B-E84D4C336775}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Välittäjän tunnus&quot;"
+              DTS:DTSID="{D238FF9D-8698-4DCA-B1C9-0D98B1A636A5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Lähetyslupa&quot;"
+              DTS:DTSID="{A5CDCA3C-EFFD-4046-87D1-19B437B055BA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0022__x002C__x0022_"
+              DTS:MaximumWidth="200"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;OVT-tunnus&quot;"
+              DTS:DTSID="{6C5EF221-D812-4179-98EF-2DCF1A59B827}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Esitystavat&quot;"
+              DTS:DTSID="{FEC3DFEC-9174-4150-AD6E-3C16C642147A}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[InputFile_new]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{5756B50E-0E9B-4CE1-B160-8256E3912B39}"
+      DTS:ObjectName="InputFile_new">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="65001">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="300"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Yrityksen nimi"
+              DTS:DTSID="{B2C7332D-97F9-45DE-A8B8-F0E34623653B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Y-tunnus"
+              DTS:DTSID="{0176E28A-EF5E-4815-8D9B-C476FE86B0B2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Operaattori"
+              DTS:DTSID="{C452F2A3-FAA3-416A-BAD9-7BEFD07058E4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Lähettää"
+              DTS:DTSID="{37AF1A50-D292-4A5F-9C45-E5259B4E3F4C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Vastaanottaa"
+              DTS:DTSID="{56FBA21A-84C2-4B3F-B8C1-D1A7730F2A55}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Vastaanotto-osoite"
+              DTS:DTSID="{48373993-700B-4B55-A56A-92902DA42F54}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Muokattu"
+              DTS:DTSID="{51C2A3B5-06F2-432A-95DA-26706CA0DD69}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Välittäjän tunnus"
+              DTS:DTSID="{44520114-2B57-40D0-A711-5FDD53A82A9C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="OVT-tunnus"
+              DTS:DTSID="{ADAC609B-E4DE-4D14-A2C2-6976755C357B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LiitteidenVastOtto"
+              DTS:DTSID="{920E5EDE-B733-4BBF-80E0-EDB5BDE01D02}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[InputFile_new2]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{7BA01102-DF69-479D-927B-91B3D9C7B88B}"
+      DTS:ObjectName="InputFile_new2">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="65001">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="300"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Yrityksen nimi"
+              DTS:DTSID="{9B91A3E1-9BDE-408F-BB00-4EFD3A9AD7CD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Y-tunnus"
+              DTS:DTSID="{7B23C466-905E-4195-9D85-103D659595AF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Operaattori"
+              DTS:DTSID="{8080BEBE-E87A-474C-9DAE-83B274ACC92D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Lähettää"
+              DTS:DTSID="{C9F3D1E0-8314-486A-9AAF-E14DB907DD7E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Vastaanottaa"
+              DTS:DTSID="{F58A3778-6D05-442B-B1BB-78ECC63179E5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Vastaanotto-osoite"
+              DTS:DTSID="{A042DA35-EB84-4558-BE0B-D3DCF2AB5766}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="300"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Vastaanotto-osoitteen nimi"
+              DTS:DTSID="{C48E7EAE-A52C-40A3-AB63-0134BA7692E4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="225"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Muokattu"
+              DTS:DTSID="{DEB45E98-5EE0-4247-B950-80F4F5F6E4E3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Välittäjän tunnus"
+              DTS:DTSID="{1EAEFB6B-1A21-44A7-859B-30A5D3A8300E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="OVT-tunnus"
+              DTS:DTSID="{072FDADC-76B3-4CFD-9017-6E6BBE4DADDD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Ensisijainen vastaanotto-osoite"
+              DTS:DTSID="{7F9E698B-EB0C-430F-884A-B806649CFD30}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Liitteiden vastaanotto"
+              DTS:DTSID="{501A787A-2808-4AD4-B5D6-856436D0AED5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Julkinen"
+              DTS:DTSID="{607D2785-6D5C-483D-8F9C-3AA85D18E39A}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C84BBB3E-0F70-4073-A3BF-5FFCE46FD438}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{30958FA9-E171-41E7-9369-A5AC33A8AC3C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowId">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F1F3ACB5-B723-40A6-8597-80E3CBB1CB19}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowIds">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F2CADA3E-6E92-4826-B32B-D10020B557C8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowNumber">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{2FDFECDB-D8F5-4FD1-8F53-CE20BCC200F5}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{6618BA51-0573-494B-8892-D5DFBA890A7F}"
+        DTS:ObjectName="{6618BA51-0573-494B-8892-D5DFBA890A7F}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="\\intad1.com\data\DataMining\FI\VerkkoLasku" />
+            <FEFEProperty
+              FileSpec="tieke_eInvoice_addresses_*.*" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\InputToTemp"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{C6190253-DBC7-4FB7-B2E4-0D91C79F4C0D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="InputToTemp"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="FirstAndLastColumn"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Inputs[Derived Column Input].Columns[Yrityksen nimi]"
+                          cachedDataType="wstr"
+                          cachedLength="300"
+                          cachedName="Yrityksen nimi"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Yrityksen nimi]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Output].Columns[@[User:RowNumber]]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Output].Columns[@[User:RowNumber]]"
+                          name="@[User:RowNumber]"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::RowNumber] + 1</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::RowNumber] + 1</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Output].Columns[YrityksenNimi_apux]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="299"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Output].Columns[YrityksenNimi_apux]"
+                          name="YrityksenNimi_apux"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">([LEN](#{Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Yrityksen nimi]}) &gt; 1) ? [SUBSTRING](#{Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Yrityksen nimi]},2,[LEN](#{Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Yrityksen nimi]}) - 1) : ""</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(LEN([Yrityksen nimi]) &gt; 1) ? SUBSTRING([Yrityksen nimi],2,LEN([Yrityksen nimi]) - 1) : ""</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\InputToTemp\Flat File Source"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1035"
+                  name="Flat File Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[InputFile_new2]"
+                      connectionManagerRefId="Package.ConnectionManagers[InputFile_new2]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Yrityksen nimi]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Yrityksen nimi]"
+                          length="300"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Yrityksen nimi]"
+                          name="Yrityksen nimi"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Y-tunnus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Y-tunnus]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Y-tunnus]"
+                          name="Y-tunnus"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Operaattori]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Operaattori]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Operaattori]"
+                          name="Operaattori"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Lähettää]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Lähettää]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Lähettää]"
+                          name="Lähettää"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Vastaanottaa]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Vastaanottaa]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Vastaanottaa]"
+                          name="Vastaanottaa"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Vastaanotto-osoite]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Vastaanotto-osoite]"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Vastaanotto-osoite]"
+                          name="Vastaanotto-osoite"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Muokattu]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Muokattu]"
+                          length="225"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Muokattu]"
+                          name="Muokattu"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Välittäjän tunnus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Välittäjän tunnus]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Välittäjän tunnus]"
+                          name="Välittäjän tunnus"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[OVT-tunnus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[OVT-tunnus]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[OVT-tunnus]"
+                          name="OVT-tunnus"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Ensisijainen vastaanotto-osoite]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Ensisijainen vastaanotto-osoite]"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Ensisijainen vastaanotto-osoite]"
+                          name="Ensisijainen vastaanotto-osoite"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Liitteiden vastaanotto]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Liitteiden vastaanotto]"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Liitteiden vastaanotto]"
+                          name="Liitteiden vastaanotto"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Vastaanotto-osoitteen nimi]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Vastaanotto-osoitteen nimi]"
+                          length="300"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Vastaanotto-osoitteen nimi]"
+                          name="Vastaanotto-osoitteen nimi"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Julkinen]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Julkinen]"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Julkinen]"
+                          name="Julkinen"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Yrityksen nimi]"
+                          dataType="wstr"
+                          length="300"
+                          name="Yrityksen nimi" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Y-tunnus]"
+                          dataType="wstr"
+                          length="100"
+                          name="Y-tunnus" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Operaattori]"
+                          dataType="wstr"
+                          length="100"
+                          name="Operaattori" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Lähettää]"
+                          dataType="wstr"
+                          length="100"
+                          name="Lähettää" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Vastaanottaa]"
+                          dataType="wstr"
+                          length="100"
+                          name="Vastaanottaa" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Vastaanotto-osoite]"
+                          dataType="wstr"
+                          length="500"
+                          name="Vastaanotto-osoite" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Muokattu]"
+                          dataType="wstr"
+                          length="225"
+                          name="Muokattu" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Välittäjän tunnus]"
+                          dataType="wstr"
+                          length="100"
+                          name="Välittäjän tunnus" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[OVT-tunnus]"
+                          dataType="wstr"
+                          length="100"
+                          name="OVT-tunnus" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Ensisijainen vastaanotto-osoite]"
+                          dataType="wstr"
+                          length="50"
+                          name="Ensisijainen vastaanotto-osoite" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Liitteiden vastaanotto]"
+                          dataType="wstr"
+                          length="50"
+                          name="Liitteiden vastaanotto" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Vastaanotto-osoitteen nimi]"
+                          dataType="wstr"
+                          length="300"
+                          name="Vastaanotto-osoitteen nimi" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Julkinen]"
+                          dataType="wstr"
+                          length="50"
+                          name="Julkinen" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[VERKKOLASKUTEMP].[Yritykset2]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL]"
+                      connectionManagerRefId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Yrityksen nimi]"
+                          cachedDataType="wstr"
+                          cachedLength="300"
+                          cachedName="Yrityksen nimi"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YrityksenNimi]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Yrityksen nimi]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Y-tunnus]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Y-tunnus"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YTunnus]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Y-tunnus]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Operaattori]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Operaattori"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Operaattori]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Operaattori]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Lähettää]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Lähettää"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lahettaa]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Lähettää]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Vastaanottaa]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Vastaanottaa"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Vastaanottaa]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Vastaanottaa]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Vastaanotto-osoite]"
+                          cachedDataType="wstr"
+                          cachedLength="500"
+                          cachedName="Vastaanotto-osoite"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VastaanottoOsoite]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Vastaanotto-osoite]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Muokattu]"
+                          cachedDataType="wstr"
+                          cachedLength="225"
+                          cachedName="Muokattu"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Muokattu]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Muokattu]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Välittäjän tunnus]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="Välittäjän tunnus"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValittajanTunnus]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Välittäjän tunnus]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Ensisijainen vastaanotto-osoite]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Ensisijainen vastaanotto-osoite"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Ensisijainen]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Ensisijainen vastaanotto-osoite]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Liitteiden vastaanotto]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Liitteiden vastaanotto"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VastaanottaaLiitteita]"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Liitteiden vastaanotto]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YrityksenNimi]"
+                          dataType="wstr"
+                          length="300"
+                          name="YrityksenNimi" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YTunnus]"
+                          dataType="wstr"
+                          length="100"
+                          name="YTunnus" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Operaattori]"
+                          dataType="wstr"
+                          length="100"
+                          name="Operaattori" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lahettaa]"
+                          dataType="wstr"
+                          length="100"
+                          name="Lahettaa" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Vastaanottaa]"
+                          dataType="wstr"
+                          length="100"
+                          name="Vastaanottaa" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VastaanottoOsoite]"
+                          dataType="wstr"
+                          length="500"
+                          name="VastaanottoOsoite" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Muokattu]"
+                          dataType="wstr"
+                          length="255"
+                          name="Muokattu" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValittajanTunnus]"
+                          dataType="wstr"
+                          length="100"
+                          name="ValittajanTunnus" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lahetyslupa]"
+                          dataType="wstr"
+                          length="100"
+                          name="Lahetyslupa" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OVTTunnus]"
+                          dataType="wstr"
+                          length="200"
+                          name="OVTTunnus" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Esitystavat]"
+                          dataType="wstr"
+                          length="255"
+                          name="Esitystavat" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YritysRowId]"
+                          dataType="i4"
+                          name="YritysRowId" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VastaanottaaLiitteita]"
+                          dataType="wstr"
+                          length="50"
+                          name="VastaanottaaLiitteita" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Ensisijainen]"
+                          dataType="wstr"
+                          length="50"
+                          name="Ensisijainen" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="TrimYrityksenNimi"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Inputs[Derived Column Input].Columns[Yrityksen nimi]"
+                          cachedDataType="wstr"
+                          cachedLength="300"
+                          cachedName="Yrityksen nimi"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Yrityksen nimi]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[LTRIM](#{Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[Yrityksen nimi]})</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">LTRIM([Yrityksen nimi])</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Outputs[Derived Column Output].Columns[YritysId]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Outputs[Derived Column Output].Columns[YritysId]"
+                          name="YritysId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::RowNumber]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::RowNumber]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\InputToTemp.Paths[Derived Column Output]"
+                  endId="Package\Foreach Loop Container\InputToTemp\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\InputToTemp.Paths[Derived Column Output1]"
+                  endId="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi.Inputs[Derived Column Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\InputToTemp.Paths[Flat File Source Output]"
+                  endId="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn.Inputs[Derived Column Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{83E24B8C-FA7E-4B98-A432-7FA6E7057DC1}"
+          DTS:ObjectName="{83E24B8C-FA7E-4B98-A432-7FA6E7057DC1}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\RenameSchema"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D3167F33-72A5-441F-8566-78CD9AFB15EA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="RenameSchema"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3117858B-37BD-407E-B3EE-86938C3152B7}"
+          SQLTask:SqlStatementSource="ALTER SCHEMA [VERKKOLASKUTEMP2] TRANSFER [VERKKOLASKU].Yritykset   ;&#xA;/*&#xA;ALTER SCHEMA [VERKKOLASKUTEMP2] TRANSFER [VERKKOLASKU].YrityksetVastaanOttoOsoitteet   ;&#xA;*/&#xA;ALTER SCHEMA [VERKKOLASKU] TRANSFER [VERKKOLASKUTEMP].Yritykset   ;&#xA;/*&#xA;ALTER SCHEMA [VERKKOLASKU] TRANSFER [VERKKOLASKUTEMP].YrityksetVastaanOttoOsoitteet   ;&#xA;*/&#xA;ALTER SCHEMA [VERKKOLASKUTEMP] TRANSFER [VERKKOLASKUTEMP2].Yritykset   ;&#xA;/*&#xA;ALTER SCHEMA [VERKKOLASKUTEMP] TRANSFER [VERKKOLASKUTEMP2].YrityksetVastaanOttoOsoitteet   ;&#xA;*/" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TrunacateTempTables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4B54E1C6-45D3-4142-95BC-3D9E0B597E16}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TrunacateTempTables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3117858B-37BD-407E-B3EE-86938C3152B7}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [VERKKOLASKUTEMP].[Yritykset];&#xA;TRUNCATE TABLE [VERKKOLASKUTEMP].[Yritykset2];&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\YrityksetToYritykset2"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2FA958BE-38AE-4F12-B3FE-014A6934316F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="YrityksetToYritykset2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3117858B-37BD-407E-B3EE-86938C3152B7}"
+          SQLTask:SqlStatementSource="INSERT INTO [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[Yritykset]&#xA;           ([YrityksenNimi]&#xA;           ,[YTunnus]&#xA;           ,[Operaattori]&#xA;           ,[Lahettaa]&#xA;           ,[Vastaanottaa]&#xA;           ,VastaanottoOsoite&#xA;           ,[Muokattu]&#xA;           ,[ValittajanTunnus]&#xA;           ,[Lahetyslupa]&#xA;           ,[OVTTunnus]&#xA;           ,[Esitystavat]&#xA;,VastaanottaaLiitteita&#xA;,Ensisijainen&#xA;           ,YritysRowId)&#xA;select YrityksenNimi&#xA;           ,YTunnus&#xA;           ,Operaattori&#xA;           ,Lahettaa&#xA;           ,Vastaanottaa&#xA;           ,VastaanottoOsoite&#xA;           ,Muokattu&#xA;           ,ValittajanTunnus&#xA;           ,Lahetyslupa&#xA;           ,OVTTunnus&#xA;          , Esitystavat&#xA;,VastaanottaaLiitteita&#xA;,Ensisijainen&#xA;           ,YritysRowId&#x9;&#x9;   &#xA;from  [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[Yritykset2]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{5174BB5B-7632-4323-A0E8-2E672971EC89}"
+      DTS:From="Package\TrunacateTempTables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{917E2B4E-918B-4B86-8B8C-266E497DC6DD}"
+      DTS:From="Package\Foreach Loop Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\YrityksetToYritykset2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{B934CF16-1C68-471C-B702-69242D99D89C}"
+      DTS:From="Package\YrityksetToYritykset2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\RenameSchema" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Foreach Loop Container\InputToTemp"
+          TopLeft="30.8571423608429,16.5647052731893" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="241,82"
+          Size="241,125"
+          Id="Package\Foreach Loop Container"
+          TopLeft="174.285713098487,76.6588244474467" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\RenameSchema"
+          TopLeft="207.714286084078,369.25882984412" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\TrunacateTempTables"
+          TopLeft="195.285715414553,10.3882345562575" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\YrityksetToYritykset2"
+          TopLeft="203.285714801477,267.788244328614" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="291.53571425652,52.3882345562575">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,24.2705898911892"
+              Start="0,0"
+              End="0,16.7705898911892">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.7705898911892" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="293.785713949982,201.658824447447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,66.1294198811673"
+              Start="0,0"
+              End="0,58.6294198811673">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.6294198811673" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="289.250000442777,309.788244328614">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,59.470585515506"
+              Start="0,0"
+              End="0,51.970585515506">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.970585515506" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="\\groupad1.com\data\DataMining\FI\VerkkoLasku&#xA;c:\temp"
+          ParentId="Package"
+          FontInfo="{x:Null}"
+          Size="296,56"
+          Id="f051dc19-a44f-4c96-9d52-a1d8fb1d8a6b"
+          TopLeft="464,142" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\InputToTemp">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Foreach Loop Container\InputToTemp\OLE DB Destination"
+          TopLeft="159,272" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi"
+          TopLeft="159,196" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn"
+          TopLeft="157,122" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Foreach Loop Container\InputToTemp\Flat File Source"
+          TopLeft="153,45" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\InputToTemp.Paths[Flat File Source Output]"
+          TopLeft="229,87">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="15,35"
+              Start="0,0"
+              End="15,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5"
+                    Point2="0,17.5"
+                    Point3="4,17.5" />
+                  <mssgle:LineSegment
+                    End="11,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11,17.5"
+                    Point2="15,17.5"
+                    Point3="15,21.5" />
+                  <mssgle:LineSegment
+                    End="15,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\InputToTemp.Paths[Derived Column Output1]"
+          TopLeft="243,164">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\InputToTemp.Paths[Derived Column Output]"
+          TopLeft="243.2,237.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,34.4"
+              Start="0,0"
+              End="0,26.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="11§"
+          ParentId="Package\Foreach Loop Container\InputToTemp"
+          FontInfo="{x:Null}"
+          Size="47,40"
+          Id="74f25d82-505c-48f8-a899-5d3ef78fc052"
+          TopLeft="1637,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\InputToTemp\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

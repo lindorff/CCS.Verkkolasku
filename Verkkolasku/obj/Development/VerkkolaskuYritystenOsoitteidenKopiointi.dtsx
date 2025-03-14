@@ -1,0 +1,734 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/1/2018 12:40:01 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LTR90NC4F2"
+  DTS:CreatorName="GROUPAD1\kaijahe"
+  DTS:DTSID="{FD784AA0-D696-409B-A8BD-838402E71A62}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1035"
+  DTS:ObjectName="VerkkolaskuYritystenOsoitteidenKopiointi"
+  DTS:PackageType="5"
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{39A21565-4A50-46B3-A3A8-1C13D213F28A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{14490EFB-9EEC-494F-B8D6-713BEEE6ABA8}"
+      DTS:ObjectName="AG-ODS-PROD.CCS_OPERATIONAL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=lwsqltst012;Initial Catalog=CCS_OPERATIONAL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-VerkkolaskuYritystenOsoitteidenKopiointi-{14490EFB-9EEC-494F-B8D6-713BEEE6ABA8}AG-ODS-PROD.CCS_OPERATIONAL;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AG-ODSPARA-PROD.COMMON_EXTERNAL_DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{ED112ECA-443E-4AF8-A5D3-4DBABC8C1E51}"
+      DTS:ObjectName="AG-ODSPARA-PROD.COMMON_EXTERNAL_DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=lwsqltst012;Initial Catalog=COMMON_EXTERNAL_DB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-VerkkolaskuYritystenOsoitteidenKopiointi-{ED112ECA-443E-4AF8-A5D3-4DBABC8C1E51}AG-ODSPARA-PROD.COMMON_EXTERNAL_DB;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\KopioiData"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{77C49830-1A20-4646-BEEC-7961C5DA3835}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="KopioiData"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\KopioiData\OLE DB Source 1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source 1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select 
+[YTunnus]
+      ,[AlkuPvm]
+      ,[LoppuPvm]
+      ,[Valittaja]
+      ,[VastaanottoOsoite]
+      ,[Lahde]
+      ,[Valittajantunnus]
+from
+[CCS_OPERATIONAL].[VERKKOLASKU].[Yritykset_Karhut_Valittu]
+where LoppuPvm is null</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\KopioiData\OLE DB Source 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL]"
+                  connectionManagerRefId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[YTunnus]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[YTunnus]"
+                      length="100"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[YTunnus]"
+                      name="YTunnus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[AlkuPvm]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[AlkuPvm]"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[AlkuPvm]"
+                      name="AlkuPvm"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LoppuPvm]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LoppuPvm]"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LoppuPvm]"
+                      name="LoppuPvm"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Valittaja]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Valittaja]"
+                      length="100"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Valittaja]"
+                      name="Valittaja"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[VastaanottoOsoite]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[VastaanottoOsoite]"
+                      length="500"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[VastaanottoOsoite]"
+                      name="VastaanottoOsoite"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Lahde]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Lahde]"
+                      length="2"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Lahde]"
+                      name="Lahde"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Valittajantunnus]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Valittajantunnus]"
+                      length="100"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Valittajantunnus]"
+                      name="Valittajantunnus"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[YTunnus]"
+                      dataType="wstr"
+                      length="100"
+                      name="YTunnus" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[AlkuPvm]"
+                      dataType="dbTimeStamp2"
+                      name="AlkuPvm"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[LoppuPvm]"
+                      dataType="dbTimeStamp2"
+                      name="LoppuPvm"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Valittaja]"
+                      dataType="wstr"
+                      length="100"
+                      name="Valittaja" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[VastaanottoOsoite]"
+                      dataType="wstr"
+                      length="500"
+                      name="VastaanottoOsoite" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Lahde]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Lahde" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[Valittajantunnus]"
+                      dataType="wstr"
+                      length="100"
+                      name="Valittajantunnus" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[YTunnus]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[YTunnus]"
+                      name="YTunnus" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[AlkuPvm]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[AlkuPvm]"
+                      name="AlkuPvm"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LoppuPvm]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[LoppuPvm]"
+                      name="LoppuPvm"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Valittaja]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Valittaja]"
+                      name="Valittaja" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[VastaanottoOsoite]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[VastaanottoOsoite]"
+                      name="VastaanottoOsoite" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Lahde]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Lahde]"
+                      name="Lahde" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Valittajantunnus]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[Valittajantunnus]"
+                      name="Valittajantunnus" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\KopioiData\Temp_Skeema"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Temp_Skeema"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[temp].[einvoice_address_1]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\KopioiData\Temp_Skeema.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AG-ODSPARA-PROD.COMMON_EXTERNAL_DB]"
+                  connectionManagerRefId="Package.ConnectionManagers[AG-ODSPARA-PROD.COMMON_EXTERNAL_DB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].Columns[YTunnus]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="YTunnus"
+                      externalMetadataColumnId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[YTunnus]"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[YTunnus]" />
+                    <inputColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].Columns[AlkuPvm]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="AlkuPvm"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[AlkuPvm]"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[AlkuPvm]" />
+                    <inputColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].Columns[LoppuPvm]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="LoppuPvm"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[LoppuPvm]"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[LoppuPvm]" />
+                    <inputColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].Columns[Valittaja]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Valittaja"
+                      externalMetadataColumnId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[Valittaja]"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Valittaja]" />
+                    <inputColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].Columns[VastaanottoOsoite]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="VastaanottoOsoite"
+                      externalMetadataColumnId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[VastaanottoOsoite]"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[VastaanottoOsoite]" />
+                    <inputColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].Columns[Lahde]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Lahde"
+                      externalMetadataColumnId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[Lahde]"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Lahde]" />
+                    <inputColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].Columns[Valittajantunnus]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Valittajantunnus"
+                      externalMetadataColumnId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[Valittajantunnus]"
+                      lineageId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[Valittajantunnus]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[YTunnus]"
+                      dataType="wstr"
+                      length="100"
+                      name="YTunnus" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[AlkuPvm]"
+                      dataType="dbTimeStamp2"
+                      name="AlkuPvm"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[LoppuPvm]"
+                      dataType="dbTimeStamp2"
+                      name="LoppuPvm"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[Valittaja]"
+                      dataType="wstr"
+                      length="100"
+                      name="Valittaja" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[VastaanottoOsoite]"
+                      dataType="wstr"
+                      length="500"
+                      name="VastaanottoOsoite" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[Lahde]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Lahde" />
+                    <externalMetadataColumn
+                      refId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input].ExternalColumns[Valittajantunnus]"
+                      dataType="wstr"
+                      length="100"
+                      name="Valittajantunnus" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\KopioiData\Temp_Skeema.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\KopioiData\Temp_Skeema.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\KopioiData\Temp_Skeema.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\KopioiData\Temp_Skeema.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\KopioiData\Temp_Skeema.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\KopioiData.Paths[OLE DB Source Output]"
+              endId="Package\KopioiData\Temp_Skeema.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\KopioiData\OLE DB Source 1.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SkeemojenUudelleenNimeäminen"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{27FB8892-6F76-48AA-B2B7-A076F5393C4E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SkeemojenUudelleenNimeäminen"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ED112ECA-443E-4AF8-A5D3-4DBABC8C1E51}"
+          SQLTask:SqlStatementSource="ALTER SCHEMA temp2 TRANSFER tieke.einvoice_address_1;&#xA;ALTER SCHEMA tieke TRANSFER temp.einvoice_address_1;&#xA;ALTER SCHEMA temp TRANSFER temp2.einvoice_address_1;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TruncateTable"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0DBAF082-B0F4-454E-8269-41482E5CDA14}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TruncateTable"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ED112ECA-443E-4AF8-A5D3-4DBABC8C1E51}"
+          SQLTask:SqlStatementSource="truncate table  temp.einvoice_address_1;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B17F9097-8C95-4C02-81F2-F0F56D3DA6A6}"
+      DTS:From="Package\KopioiData"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SkeemojenUudelleenNimeäminen" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{CAADEEAD-AFA7-48AD-8E18-080698A7D3A5}"
+      DTS:From="Package\TruncateTable"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\KopioiData" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="132,42"
+          Id="Package\KopioiData"
+          TopLeft="185,163" />
+        <NodeLayout
+          Size="238,42"
+          Id="Package\SkeemojenUudelleenNimeäminen"
+          TopLeft="140,257" />
+        <NodeLayout
+          Size="148,42"
+          Id="Package\TruncateTable"
+          TopLeft="176,85" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="251,205">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,52"
+              Start="0,0"
+              End="8,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22"
+                    Point2="0,26"
+                    Point3="4,26" />
+                  <mssgle:LineSegment
+                    End="4,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,26"
+                    Point2="8,26"
+                    Point3="8,30" />
+                  <mssgle:LineSegment
+                    End="8,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="250.5,127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Tällä kopioidaan valitut yritysten osoitteet COMMON_EXTERNAL_DB kantaan, &#xA;josta niitä voi käyttää muutkin"
+          ParentId="Package"
+          Size="503,53"
+          Id="22998956-cd9e-4c17-8a08-5ff0361fc45a"
+          TopLeft="44,25">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\KopioiData">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\KopioiData\Temp_Skeema"
+          TopLeft="173,173" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\KopioiData\OLE DB Source 1"
+          TopLeft="172,73" />
+        <EdgeLayout
+          Id="Package\KopioiData.Paths[OLE DB Source Output]"
+          TopLeft="250.5,115">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="db-ods-ccs.intad1.com,5011&#xD;&#xA;COMMON_EXTERNAL"
+          ParentId="Package\KopioiData"
+          FontInfo="{x:Null}"
+          Size="178,60"
+          Id="406c3cf2-1b7e-4390-bde9-25accda16af0"
+          TopLeft="522,28" />
+        <AnnotationLayout
+          Text="db-ods-ccs.intad1.com,5011&#xD;&#xA;CCS_OPERATIONAL"
+          ParentId="Package\KopioiData"
+          FontInfo="{x:Null}"
+          Size="178,60"
+          Id="33701229-2ead-4ee9-848c-d871e1a83c12"
+          TopLeft="570,203" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\KopioiData\OLE DB Source 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\KopioiData\Temp_Skeema">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

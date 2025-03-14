@@ -1,0 +1,3911 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/29/2018 9:23:49 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LTR90NC4F2"
+  DTS:CreatorName="GROUPAD1\kaijahe"
+  DTS:DTSID="{0EE18F92-18E4-42ED-A510-41198F04631B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1035"
+  DTS:ObjectName="VerkkolaskuKuluttajatImport"
+  DTS:PackageType="5"
+  DTS:VersionBuild="301"
+  DTS:VersionGUID="{1DBD872E-7C90-458D-9856-FFC5CBB66FEC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[fi422helsdb012.CCS_OPERATIONAL]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+      DTS:ObjectName="fi422helsdb012.CCS_OPERATIONAL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=lwsqltst012;Initial Catalog=CCS_OPERATIONAL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-VerkkolaskuKuluttajatImport-{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}fi422helsdb012.CCS_OPERATIONAL;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{176D55D3-4CA3-407F-B86B-CE1F56D016A8}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowsToSkip="1"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Teksti"
+              DTS:DTSID="{1F1C30A9-FE2B-422F-BFF9-8BBA880E0F40}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager_dest]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{41A89FC5-3FEC-4246-A24D-C3FD7E94A7D5}"
+      DTS:ObjectName="Flat File Connection Manager_dest">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">LEFT( @[User::FileName], 24)  + "XX.xml"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="XX.xml">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 0"
+              DTS:DTSID="{1DC9E26D-58F3-42F4-9669-85764198524D}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[RISanomaX.xml]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{CEAECD64-C44D-49A4-B74C-CFE7A9A5C1F7}"
+      DTS:ObjectName="RISanomaX.xml">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Temp\RISanomaX.xml" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[testi.xslt]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{C84F92C9-C3B1-49F4-9626-00277965BAF9}"
+      DTS:ObjectName="testi.xslt">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\Temp\RSI\testi.xslt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F8AE2FF3-4017-44E7-83A0-A50BA18E097A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Aikaleima">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0261188A-49E7-4DC4-ABC8-4F542B1F8E7E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Aikaleimat">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8DB58E15-9B4E-4C1F-9655-2E2DBD09B35E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AjoHetki">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{00114A53-43F9-4CCA-8DFE-2075DDDBF152}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;\\\\intad1.com\\data\\DataMining\\FI\\VerkkoLasku\\Archive&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArkistoTiedosto">
+      <DTS:VariableValue
+        DTS:DataType="8">\\intad1.com\data\DataMining\FI\VerkkoLasku\Archive</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1FFABB0E-868B-4604-8644-3FBF8CFC6C02}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FBE8E3B3-C921-40A6-B615-7FA195FA6295}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Hetu">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{59478A95-A73F-4386-92E1-0E3708535D1B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HeTu">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9327547B-D094-40CD-9639-811B5EFBDF21}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HeTu2">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3ED772A7-CAA1-472F-B623-BFCC53C72C90}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="HetuKakkonen">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AE0C4C70-FA8B-4697-B981-EB3AABE9FD1F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Hetut">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3F7C4FBD-A044-4A9B-914A-80F153EA1861}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LaskutusAihe">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FE997A9C-2BD2-466D-9279-272B3EF7F9FC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LaskutusAiheet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{14D5894B-207E-4FA6-86EC-D459ECCEC252}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PaattymisSyyVirhe">
+      <DTS:VariableValue
+        DTS:DataType="8">'NOT SAVED'</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{696874BD-AA00-4D6D-8008-7216AC9E3466}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Palveluviite">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EFB50172-6D7C-4871-B8C0-EFBF7A3A6363}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PalveluViiteStr">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7B6BF409-9952-4EEC-BCBB-32136117DF24}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Palveluviitteet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A0FA8D1C-0D2F-4CAB-8D1B-AB93594A3208}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ResultSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E40C4FC5-8D5A-4154-AAD1-76BDD959B2DE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ResultSet2">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{159D7099-4F4A-4A6C-B2F9-ACA629F72193}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RiviLaskuri">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F364A330-FA0C-4493-B6A6-45ED98FF52E6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="riviLKM">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6D4967B8-4E0F-4392-83B8-7D78A508FC02}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SanomaTyypit">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{660AA7AC-4B25-47B8-91E6-5593025EFB30}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SanomaTyyppi">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4DA8D204-5F6F-4396-876A-2BF0CE9285D8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Tiedosto">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9BEF811A-89A9-4589-8173-844B67E7E05F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TiedostoNimet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TiedostoNimi">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{58BF8E0D-88D1-4CC9-96B7-249E82F742B7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TxTano">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DB975D55-4BE2-4828-8A30-486183C3C306}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TxTanot">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C39B849A-9AE7-46A0-8260-8FF4635FEDA7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Valittajantunnukset">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FE98F8EF-6E15-4734-B22F-B877DE411286}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Valittajantunnus">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C09B26EE-D2D8-432B-835C-558D71D79EB1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Variable">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{80B711FA-8007-4829-83ED-F3175EF6B89C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VelNo">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3CA78CBA-685C-426B-8F19-E7141087351B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VelNot">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B2A4DC1E-0358-4B20-AF8D-5A470B11BC5F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VerkkolaskuOsoite">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B62647AF-30F3-444D-8B0F-75F067A71052}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VerkkolaskuOsoitteet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{F2D889D3-813F-46E0-8B9D-3F14259587C1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="select SYSDATETIME()"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::AjoHetki" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:Disabled="True"
+      DTS:DTSID="{5B9EFB31-9008-46C7-A204-4FBF2ECB5056}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{D00498EA-7B28-4D4E-847E-5A869AA0934D}"
+        DTS:ObjectName="{D00498EA-7B28-4D4E-847E-5A869AA0934D}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\temp\Verkkolasku" />
+            <FEFEProperty
+              FileSpec="003701403514*.xml" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\ArkistoiTiedosto"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{58D70CBF-DF0E-4CC9-A7E0-FECFEBF884DB}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ArkistoiTiedosto"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="{176D55D3-4CA3-407F-B86B-CE1F56D016A8}"
+              TaskDestinationPath="User::ArkistoTiedosto"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\LaskurinNollaus"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{20F1D89A-96A3-46DF-A9DD-5409B667D807}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="LaskurinNollaus"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RiviLaskuri] = 0" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Vie tauluun"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{32B99119-C37C-44C3-972D-1C2E814D3569}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Vie tauluun"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Vie tauluun\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Output].Columns[Tiedosto]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="150"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Output].Columns[Tiedosto]"
+                          name="Tiedosto"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::FileName]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::FileName]</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Output].Columns[RiviNro]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Output].Columns[RiviNro]"
+                          name="RiviNro"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::RiviLaskuri] + 1</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::RiviLaskuri] + 1</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Vie tauluun\Flat File Source"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1035"
+                  name="Flat File Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Output].Columns[Teksti]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Teksti]"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Output].Columns[Teksti]"
+                          name="Teksti"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Teksti]"
+                          dataType="wstr"
+                          length="1000"
+                          name="Teksti" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[VERKKOLASKUTEMP].[RSISanoma]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[fi422helsdb012.CCS_OPERATIONAL]"
+                      connectionManagerRefId="Package.ConnectionManagers[fi422helsdb012.CCS_OPERATIONAL]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Teksti]"
+                          cachedDataType="wstr"
+                          cachedLength="1000"
+                          cachedName="Teksti"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rivi]"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Output].Columns[Teksti]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Tiedosto]"
+                          cachedDataType="wstr"
+                          cachedName="Tiedosto"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tiedosto]"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Output].Columns[Tiedosto]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RiviNro]"
+                          cachedDataType="i4"
+                          cachedName="RiviNro"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowId]"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Output].Columns[RiviNro]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowId]"
+                          dataType="i2"
+                          name="RowId" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rivi]"
+                          dataType="wstr"
+                          length="1000"
+                          name="Rivi" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tiedosto]"
+                          dataType="wstr"
+                          length="200"
+                          name="Tiedosto" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Vie tauluun.Paths[Derived Column Output]"
+                  endId="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Vie tauluun.Paths[Flat File Source Output]"
+                  endId="Package\Foreach Loop Container\Vie tauluun\Derived Column.Inputs[Derived Column Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Foreach Loop Container\Vie tauluun\Flat File Source.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{67070702-0850-4201-BE82-C3B43FB54E5F}"
+          DTS:From="Package\Foreach Loop Container\LaskurinNollaus"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\Vie tauluun" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{F3E941CB-2C97-426C-BBF4-E3EA69A3E5A3}"
+          DTS:From="Package\Foreach Loop Container\Vie tauluun"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach Loop Container\ArkistoiTiedosto" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{FEE502DD-4421-4BFA-A0EE-19A87E795D74}"
+          DTS:ObjectName="{FEE502DD-4421-4BFA-A0EE-19A87E795D74}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container 1"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:Disabled="True"
+      DTS:DTSID="{819DAB14-CFDA-460B-9322-3561D96DCECE}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container 1">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{50C036AD-0864-4D86-86D0-709CFE4601F9}"
+        DTS:ObjectName="{50C036AD-0864-4D86-86D0-709CFE4601F9}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::TiedostoNimet" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{478C54C2-0AAE-4314-8DB1-62E779E41290}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="YhdenTiedostonDatat"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Output].Columns[TiedostonNimi]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Output].Columns[TiedostonNimi]"
+                          name="TiedostonNimi"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::TiedostoNimi]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::TiedostoNimi]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[VERKKOLASKUTEMP].[RSI_SanomaPurettu]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[fi422helsdb012.CCS_OPERATIONAL]"
+                      connectionManagerRefId="Package.ConnectionManagers[fi422helsdb012.CCS_OPERATIONAL]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[verkkolaskuosoite]"
+                          cachedDataType="wstr"
+                          cachedLength="1000"
+                          cachedName="verkkolaskuosoite"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VerkkolaskuOsoite]"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[verkkolaskuosoite]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[HeTu]"
+                          cachedDataType="wstr"
+                          cachedLength="1000"
+                          cachedName="HeTu"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HeTu]"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[HeTu]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ValittajanTunnus]"
+                          cachedDataType="wstr"
+                          cachedLength="1000"
+                          cachedName="ValittajanTunnus"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValittajanTunnus]"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValittajanTunnus]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LaskutusAihe]"
+                          cachedDataType="wstr"
+                          cachedLength="1000"
+                          cachedName="LaskutusAihe"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaskutusAihe]"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[LaskutusAihe]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PalveluViite]"
+                          cachedDataType="wstr"
+                          cachedLength="1000"
+                          cachedName="PalveluViite"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PalveluViite]"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[PalveluViite]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SanomaTyyppi]"
+                          cachedDataType="wstr"
+                          cachedLength="1000"
+                          cachedName="SanomaTyyppi"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SanomaTyyppi]"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[SanomaTyyppi]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Aikaleima]"
+                          cachedDataType="wstr"
+                          cachedLength="1000"
+                          cachedName="Aikaleima"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Aikaleima]"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aikaleima]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TiedostonNimi]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="TiedostonNimi"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tiedosto]"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Output].Columns[TiedostonNimi]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HeTu]"
+                          dataType="wstr"
+                          length="15"
+                          name="HeTu" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VerkkolaskuOsoite]"
+                          dataType="wstr"
+                          length="35"
+                          name="VerkkolaskuOsoite" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValittajanTunnus]"
+                          dataType="wstr"
+                          length="11"
+                          name="ValittajanTunnus" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaskutusAihe]"
+                          dataType="wstr"
+                          length="20"
+                          name="LaskutusAihe" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PalveluViite]"
+                          dataType="i8"
+                          name="PalveluViite" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SanomaTyyppi]"
+                          dataType="wstr"
+                          length="10"
+                          name="SanomaTyyppi" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TxTano]"
+                          dataType="wstr"
+                          length="10"
+                          name="TxTano" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VelNo]"
+                          dataType="i4"
+                          name="VelNo" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Aikaleima]"
+                          dataType="wstr"
+                          length="30"
+                          name="Aikaleima" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HeTu2]"
+                          dataType="wstr"
+                          length="20"
+                          name="HeTu2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tiedosto]"
+                          dataType="wstr"
+                          length="200"
+                          name="Tiedosto" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from 
+(
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) Aikaleima
+FROM [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE'&lt;ReceiverInfoTimeStamp&gt;%') Aikaleima 
+-- AND rivi LIKE '&lt;eb:Timestamp&gt;%') Aikaleima 
+
+FULL OUTER JOIN
+
+(
+
+select * from
+(
+SELECT 
+substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) verkkolaskuosoite
+FROM [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE '&lt;InvoiceRecipientAddress&gt;%') VerkkolaskuOsoite 
+
+FULL OUTER JOIN
+
+(
+ select * from 
+ (
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) SanomaTyyppi
+FROM [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE '&lt;MessageActionCode&gt;%') SanomaTyyppi 
+
+FULL OUTER JOIN
+
+(
+select * from
+(
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) LaskutusAihe
+FROM [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE '&lt;PaymentInstructionIdentifier&gt;%') LaskutusAihe 
+
+FULL OUTER JOIN
+
+(
+select * from 
+(
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) ValittajanTunnus
+FROM [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE '&lt;InvoiceRecipientIntermediatorAddress&gt;%') ValittajanTunnus 
+
+FULL OUTER JOIN
+
+(
+select * from 
+(
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) HeTu 
+FROM [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND (rivi LIKE '&lt;SellerInvoiceIdentifier SellerInvoiceIdentifierType="03"&gt;%'
+OR (rivi LIKE '&lt;SellerInvoiceIdentifier&gt;%' AND LEN(substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1)) = 11))) HeTu 
+
+
+
+FULL OUTER JOIN
+
+(
+SELECT COALESCE(TRY_CONVERT(BIGINT, substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, 
+CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1)),0) PalveluViite
+FROM [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND (rivi LIKE '&lt;SellerInvoiceIdentifier SellerInvoiceIdentifierType="08"&gt;%' 
+OR (rivi LIKE '&lt;SellerInvoiceIdentifier&gt;%' AND LEN(substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1)) &lt; 11))    )PalveluViite 
+
+ON 1 = 1
+) AAA on 1 = 1 ) BBB on 1 = 1 ) CCC on 1 = 1 ) DDD on 1 = 1 ) EEE ON 1 = 1
+
+select * from 
+(
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) Aikaleima
+FROM [VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE '&lt;eb:Timestamp&gt;%') Aikaleima 
+
+FULL OUTER JOIN
+
+(
+
+select * from
+(
+SELECT 
+substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) verkkolaskuosoite
+FROM [VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE '&lt;InvoiceRecipientAddress&gt;%') VerkkolaskuOsoite 
+
+FULL OUTER JOIN
+
+(
+ select * from 
+ (
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) SanomaTyyppi
+FROM [VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE '&lt;MessageActionCode&gt;%') SanomaTyyppi 
+
+FULL OUTER JOIN
+
+(
+select * from
+(
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) LaskutusAihe
+FROM [VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE '&lt;PaymentInstructionIdentifier&gt;%') LaskutusAihe 
+
+FULL OUTER JOIN
+
+(
+select * from 
+(
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) ValittajanTunnus
+FROM [VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND rivi LIKE '&lt;InvoiceRecipientIntermediatorAddress&gt;%') ValittajanTunnus 
+
+FULL OUTER JOIN
+
+(
+select * from 
+(
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) HeTu 
+FROM [VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND (rivi LIKE '&lt;SellerInvoiceIdentifier SellerInvoiceIdentifierType="03"&gt;%'
+OR (rivi LIKE '&lt;SellerInvoiceIdentifier&gt;%' AND LEN(substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1)) = 11))) HeTu 
+
+
+
+FULL OUTER JOIN
+
+(
+SELECT substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1) PalveluViite
+FROM [VERKKOLASKUTEMP].[RSISanoma]
+ WHERE Tiedosto = ?
+AND (rivi LIKE '&lt;SellerInvoiceIdentifier SellerInvoiceIdentifierType="08"&gt;%' 
+OR (rivi LIKE '&lt;SellerInvoiceIdentifier&gt;%' AND LEN(substring(rivi, CHARINDEX('&gt;', rivi, 0) + 1, CHARINDEX('&lt;/', rivi, 0) - CHARINDEX('&gt;', rivi, 0) - 1)) &lt; 11))    )PalveluViite 
+
+ON 1 = 1
+) AAA on 1 = 1 ) BBB on 1 = 1 ) CCC on 1 = 1 ) DDD on 1 = 1 ) EEE ON 1 = 1</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"Parameter0:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter1:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter2:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter3:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter4:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter5:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter6:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter7:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter8:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter9:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter10:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter11:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter12:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};"Parameter13:Input",{51734EFA-0EFC-4CEF-BDB7-1B87C6C5E1BC};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[fi422helsdb012.CCS_OPERATIONAL]"
+                      connectionManagerRefId="Package.ConnectionManagers[fi422helsdb012.CCS_OPERATIONAL]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[verkkolaskuosoite]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[verkkolaskuosoite]"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[verkkolaskuosoite]"
+                          name="verkkolaskuosoite"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[SanomaTyyppi]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SanomaTyyppi]"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[SanomaTyyppi]"
+                          name="SanomaTyyppi"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[LaskutusAihe]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LaskutusAihe]"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[LaskutusAihe]"
+                          name="LaskutusAihe"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValittajanTunnus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValittajanTunnus]"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValittajanTunnus]"
+                          name="ValittajanTunnus"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[HeTu]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HeTu]"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[HeTu]"
+                          name="HeTu"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[PalveluViite]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PalveluViite]"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[PalveluViite]"
+                          name="PalveluViite"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aikaleima]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Aikaleima]"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aikaleima]"
+                          name="Aikaleima"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[verkkolaskuosoite]"
+                          dataType="wstr"
+                          length="1000"
+                          name="verkkolaskuosoite" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SanomaTyyppi]"
+                          dataType="wstr"
+                          length="1000"
+                          name="SanomaTyyppi" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LaskutusAihe]"
+                          dataType="wstr"
+                          length="1000"
+                          name="LaskutusAihe" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValittajanTunnus]"
+                          dataType="wstr"
+                          length="1000"
+                          name="ValittajanTunnus" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HeTu]"
+                          dataType="wstr"
+                          length="1000"
+                          name="HeTu" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PalveluViite]"
+                          dataType="i8"
+                          name="PalveluViite" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Aikaleima]"
+                          dataType="wstr"
+                          length="1000"
+                          name="Aikaleima" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Aikaleima]"
+                          dataType="wstr"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Aikaleima]"
+                          name="Aikaleima" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[verkkolaskuosoite]"
+                          dataType="wstr"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[verkkolaskuosoite]"
+                          name="verkkolaskuosoite" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SanomaTyyppi]"
+                          dataType="wstr"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SanomaTyyppi]"
+                          name="SanomaTyyppi" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LaskutusAihe]"
+                          dataType="wstr"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LaskutusAihe]"
+                          name="LaskutusAihe" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValittajanTunnus]"
+                          dataType="wstr"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValittajanTunnus]"
+                          name="ValittajanTunnus" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HeTu]"
+                          dataType="wstr"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HeTu]"
+                          name="HeTu" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PalveluViite]"
+                          dataType="i8"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PalveluViite]"
+                          name="PalveluViite" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="PalveluviiteCheck"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Inputs[Derived Column Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat.Paths[Derived Column Output]"
+                  endId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Inputs[Derived Column Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat.Paths[Derived Column Output1]"
+                  endId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container 1\YhdenTiedostonDatat.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{D3313FE5-6EA6-4DA2-915E-E493BE7307EB}"
+          DTS:ObjectName="{D3313FE5-6EA6-4DA2-915E-E493BE7307EB}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::TiedostoNimi" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container 2"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:Disabled="True"
+      DTS:DTSID="{14A85086-4F9F-42C1-997B-9E558838F301}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container 2">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{87D226D2-AAC4-4CC3-BB0D-791231174E6C}"
+        DTS:ObjectName="{87D226D2-AAC4-4CC3-BB0D-791231174E6C}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ResultSet" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container 2\Expression Task"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{41471D59-FAEB-4283-8F12-1B44C0D344B9}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Expression Task"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::SanomaTyyppi]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container 2\LisaaTaiPaivita"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E5B21A02-A131-4896-9E9F-C71B6F32D04A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="LisaaTaiPaivita"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+              SQLTask:SqlStatementSource="update [VERKKOLASKU].[Kuluttaja_Osoite]&#xA;set &#xA;paattymissyy = ?, paattymispvm = ?, tiedosto = ?&#xA;where&#xA;paattymispvm is null&#xA;and hetu = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::SanomaTyyppi"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="133"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::Tiedosto"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container 2\Lopeta"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B1AFA7A6-4D99-4015-B25C-D8E66A3ED2FF}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Lopeta"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+              SQLTask:SqlStatementSource="update [VERKKOLASKU].[Kuluttaja_Osoite]&#xA;set&#xA;paattymissyy = ?, paattymispvm = ?, tiedosto = ?&#xA;where hetu = ? and paattymispvm is null&#xA;and verkkolaskuosoite = ?&#xA;and valittajantunnus = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::SanomaTyyppi"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="145"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::VerkkolaskuOsoite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="User::Valittajantunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::Tiedosto"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container 2\OrvotDeletet"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C7EB1B9E-42BF-432B-BA4B-C43A6F4E4B80}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="OrvotDeletet"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+              SQLTask:SqlStatementSource="&#xA;BEGIN&#xA;   IF NOT EXISTS (select * from&#xA;&#x9;[VERKKOLASKU].[Kuluttaja_Osoite]&#xA;&#x9;where  paattymispvm is null and hetu = ? &#xA;&#x9;and verkkolaskuosoite = ?&#xA;&#x9;and valittajantunnus = ?&#xA;&#xA;)&#xA;   BEGIN&#xA;       INSERT INTO [VERKKOLASKU].[Kuluttaja_Osoite] (    [HeTu]&#xA;      ,[TallennusPvm]&#xA;      ,[VerkkolaskuOsoite]&#xA;      ,[ValittajanTunnus]&#xA;      ,[LaskutusAihe]&#xA;      ,[PalveluViite]&#xA;      ,[SanomaTyyppi]&#xA;,[paattymissyy]&#xA;, [paattymispvm]&#xA;,[cancelled]&#xA;,tiedosto&#xA;&#xA;)&#xA;values&#xA;(&#xA;?, ?, ?, ?,?,?,?,'DEL FAILED',?,1,?&#xA;&#xA;)&#xA;   END&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::VerkkolaskuOsoite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::Valittajantunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="133"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="User::VerkkolaskuOsoite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="User::Valittajantunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="User::LaskutusAihe"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="8"
+                SQLTask:DtsVariableName="User::Palveluviite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="10"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="133"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="9"
+                SQLTask:DtsVariableName="User::SanomaTyyppi"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="11"
+                SQLTask:DtsVariableName="User::Tiedosto"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container 2\Paivita"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{490AD35F-D851-4AEA-AEF3-DBC7CBDA41AC}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Paivita"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+              SQLTask:SqlStatementSource="&#xA;insert into [VERKKOLASKU].[Kuluttaja_Osoite]&#xA;(    [HeTu]&#xA;      ,[TallennusPvm]&#xA;      ,[VerkkolaskuOsoite]&#xA;      ,[ValittajanTunnus]&#xA;      ,[LaskutusAihe]&#xA;      ,[PalveluViite]&#xA;      ,[SanomaTyyppi]&#xA;, tiedosto&#xA;&#xA;)&#xA;values&#xA;(&#xA;?, ?, ?, ?,?,?,?,?&#xA;&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="133"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::VerkkolaskuOsoite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::Valittajantunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::LaskutusAihe"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="User::PalveluViiteStr"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="User::SanomaTyyppi"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="User::Tiedosto"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container 2\VirheellinenLopetus"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E191D124-FDFE-40BD-BC58-C1B4D056EC10}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="VirheellinenLopetus"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+              SQLTask:SqlStatementSource="&#xA;BEGIN&#xA;   IF NOT EXISTS (select * from&#xA;&#x9;[VERKKOLASKU].[Kuluttaja_Osoite]&#xA;&#x9;where hetu = ? &#xA;&#x9;and verkkolaskuosoite = ?&#xA;&#x9;and valittajantunnus = ?&#xA;&#xA;)&#xA;   BEGIN&#xA;       INSERT INTO [VERKKOLASKU].[Kuluttaja_Osoite] (    [HeTu]&#xA;      ,[TallennusPvm]&#xA;      ,[VerkkolaskuOsoite]&#xA;      ,[ValittajanTunnus]&#xA;      ,[LaskutusAihe]&#xA;      ,[PalveluViite]&#xA;      ,[SanomaTyyppi]&#xA;,[paattymissyy]&#xA;, [paattymispvm]&#xA;,[cancelled]&#xA;,tiedosto&#xA;)&#xA;values&#xA;(&#xA;?, ?, ?, ?,?,?,?,'DEL FAILED',?,1, ?&#xA;&#xA;)&#xA;   END&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::VerkkolaskuOsoite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::Valittajantunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="133"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="User::VerkkolaskuOsoite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="User::Valittajantunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="User::LaskutusAihe"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="8"
+                SQLTask:DtsVariableName="User::Palveluviite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="10"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="133"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="9"
+                SQLTask:DtsVariableName="User::SanomaTyyppi"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="11"
+                SQLTask:DtsVariableName="User::Tiedosto"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container 2\VirheellinenLopetus 1"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{FAEB3117-B930-4D79-8239-5327636D4E2A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="VirheellinenLopetus 1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+              SQLTask:SqlStatementSource="update [VERKKOLASKU].[Kuluttaja_Osoite]&#xA;set&#xA;paattymissyy = 'DEL FAILED', paattymispvm = ?&#xA;where hetu = ? and paattymispvm is null&#xA;and verkkolaskuosoite = ?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="145"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::VerkkolaskuOsoite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{A534981F-6CB2-4341-BD51-133B7DBA3015}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::SanomaTyyppi] == &quot;DELETE&quot;"
+          DTS:From="Package\Foreach Loop Container 2\Expression Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container 2\OrvotDeletet" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{71FC43D9-AB4B-49D7-920D-64B3649ECD4A}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::SanomaTyyppi] == &quot;CHANGE&quot;  || @[User::SanomaTyyppi] == &quot;ADD&quot;"
+          DTS:From="Package\Foreach Loop Container 2\Expression Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach Loop Container 2\LisaaTaiPaivita" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{6ACA5419-0AC6-4CAF-88C1-859AD04A82D0}"
+          DTS:From="Package\Foreach Loop Container 2\LisaaTaiPaivita"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Foreach Loop Container 2\Paivita" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{A517686D-654C-4C6F-AA21-940DCB8A5042}"
+          DTS:From="Package\Foreach Loop Container 2\Lopeta"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Foreach Loop Container 2\VirheellinenLopetus" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{D125D426-9677-4529-BF47-8F3B1D5713C1}"
+          DTS:From="Package\Foreach Loop Container 2\VirheellinenLopetus"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Foreach Loop Container 2\VirheellinenLopetus 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{5EC5EF7B-8EDC-405F-B1F1-7C9E2F5E27BE}"
+          DTS:From="Package\Foreach Loop Container 2\OrvotDeletet"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Foreach Loop Container 2\Lopeta" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{92E55054-33E6-483A-A067-CF09E19FBB9E}"
+          DTS:ObjectName="{92E55054-33E6-483A-A067-CF09E19FBB9E}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::HeTu" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{6BACFCDE-0DD9-4247-A7AD-D585730C3392}"
+          DTS:ObjectName="{6BACFCDE-0DD9-4247-A7AD-D585730C3392}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::VerkkolaskuOsoite" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{2865EF09-53F6-426F-8724-2FEAFC6F7938}"
+          DTS:ObjectName="{2865EF09-53F6-426F-8724-2FEAFC6F7938}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::Valittajantunnus" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{C0BA0EBE-9A4F-44C2-8B3F-C20FA57CBC06}"
+          DTS:ObjectName="{C0BA0EBE-9A4F-44C2-8B3F-C20FA57CBC06}"
+          DTS:ValueIndex="3"
+          DTS:VariableName="User::LaskutusAihe" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{155FAFB1-1229-44C2-8959-1AEDA6D77C83}"
+          DTS:ObjectName="{155FAFB1-1229-44C2-8959-1AEDA6D77C83}"
+          DTS:ValueIndex="4"
+          DTS:VariableName="User::PalveluViiteStr" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{EA873B82-3E39-40AF-A973-874593371ED8}"
+          DTS:ObjectName="{EA873B82-3E39-40AF-A973-874593371ED8}"
+          DTS:ValueIndex="5"
+          DTS:VariableName="User::SanomaTyyppi" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{E6745667-09CC-497F-BDC0-17B876BDE310}"
+          DTS:ObjectName="{E6745667-09CC-497F-BDC0-17B876BDE310}"
+          DTS:ValueIndex="6"
+          DTS:VariableName="User::TxTano" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{746026B9-112E-4128-8462-D2045736DE83}"
+          DTS:ObjectName="{746026B9-112E-4128-8462-D2045736DE83}"
+          DTS:ValueIndex="7"
+          DTS:VariableName="User::VelNo" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{16EAE277-98DD-4225-A288-AAD92D36CC58}"
+          DTS:ObjectName="{16EAE277-98DD-4225-A288-AAD92D36CC58}"
+          DTS:ValueIndex="8"
+          DTS:VariableName="User::Aikaleima" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{9098594E-7C0E-4F3C-810A-3794B4FE87AE}"
+          DTS:ObjectName="{9098594E-7C0E-4F3C-810A-3794B4FE87AE}"
+          DTS:ValueIndex="10"
+          DTS:VariableName="User::Tiedosto" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{E23C2BC3-B7E6-4B8B-B71E-A45EA85A682E}"
+          DTS:ObjectName="{E23C2BC3-B7E6-4B8B-B71E-A45EA85A682E}"
+          DTS:ValueIndex="9"
+          DTS:VariableName="User::HetuKakkonen" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LooppaaVirheellisetRivit"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:Disabled="True"
+      DTS:DTSID="{8F7F3CDA-56AA-4B08-8E7C-28786E3FF951}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LooppaaVirheellisetRivit">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{D16D0A75-E427-4C4B-A9CB-9E4C333E7F08}"
+        DTS:ObjectName="{87D226D2-AAC4-4CC3-BB0D-791231174E6C}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ResultSet2" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\LooppaaVirheellisetRivit\Expression Task"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{35F9A8F5-F1A0-4181-BC6F-0700996439B7}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Expression Task"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::SanomaTyyppi]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\LooppaaVirheellisetRivit\LisaaVirheRiviDelete"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{ADA55298-BDB4-4DD3-B5CC-8BADA968132B}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="LisaaVirheRiviDelete"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+              SQLTask:SqlStatementSource="&#xA;insert into [VERKKOLASKU].[Kuluttaja_Osoite]&#xA;(    [HeTu]&#xA;      ,[TallennusPvm]&#xA;      ,[VerkkolaskuOsoite]&#xA;      ,[ValittajanTunnus]&#xA;      ,[LaskutusAihe]&#xA;      ,[PalveluViite]&#xA;      ,[SanomaTyyppi]&#xA;    ,[PaattymisPvm]&#xA; ,[PaattymisSyy]&#xA;      , [Cancelled]&#xA;, tiedosto&#xA;)&#xA;values&#xA;(&#xA;?, ?, ?, ?,?,?,?, ?,'DEL FAILED',1, ?&#xA;&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="133"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::VerkkolaskuOsoite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::Valittajantunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::LaskutusAihe"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="User::PalveluViiteStr"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="User::SanomaTyyppi"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="133"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="8"
+                SQLTask:DtsVariableName="User::Tiedosto"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\LooppaaVirheellisetRivit\LisaaVirheRiviMuu"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BF802F0D-06C8-4D79-ACC0-59711A6EDB6F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="LisaaVirheRiviMuu"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+              SQLTask:SqlStatementSource="&#xA;insert into [VERKKOLASKU].[Kuluttaja_Osoite]&#xA;(    [HeTu]&#xA;      ,[TallennusPvm]&#xA;      ,[VerkkolaskuOsoite]&#xA;      ,[ValittajanTunnus]&#xA;      ,[LaskutusAihe]&#xA;      ,[PalveluViite]&#xA;      ,[SanomaTyyppi]&#xA;    ,[PaattymisPvm]&#xA; ,[PaattymisSyy]&#xA;      , [Cancelled]&#xA;,tiedosto&#xA;&#xA;)&#xA;values&#xA;(&#xA;?, ?, ?, ?,?,?,?, ?,'NOT SAVED',1, ?&#xA;&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::HeTu"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="133"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::VerkkolaskuOsoite"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::Valittajantunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::LaskutusAihe"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="User::PalveluViiteStr"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="131"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="User::SanomaTyyppi"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="User::AjoHetki"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="8"
+                SQLTask:DtsVariableName="User::Tiedosto"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\LooppaaVirheellisetRivit.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{71365779-7D88-4A60-9F42-2C2FAF8C1D57}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::SanomaTyyppi] == &quot;DELETE&quot;"
+          DTS:From="Package\LooppaaVirheellisetRivit\Expression Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\LooppaaVirheellisetRivit\LisaaVirheRiviDelete" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\LooppaaVirheellisetRivit.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{328909E3-406B-49FF-A686-B50374D12C75}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::SanomaTyyppi] != &quot;DELETE&quot;"
+          DTS:From="Package\LooppaaVirheellisetRivit\Expression Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\LooppaaVirheellisetRivit\LisaaVirheRiviMuu" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{A14383DC-7BDD-4D9D-88D7-13B8655A238C}"
+          DTS:ObjectName="{A14383DC-7BDD-4D9D-88D7-13B8655A238C}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::HeTu" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{76D82BEC-BC89-4640-B174-4D43B8B28714}"
+          DTS:ObjectName="{76D82BEC-BC89-4640-B174-4D43B8B28714}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::VerkkolaskuOsoite" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{8BA3C1D8-9794-4B1B-AF10-FACA7A3BA0AB}"
+          DTS:ObjectName="{8BA3C1D8-9794-4B1B-AF10-FACA7A3BA0AB}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::Valittajantunnus" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{7C20847E-7EE2-4965-8F3F-84430653CE17}"
+          DTS:ObjectName="{7C20847E-7EE2-4965-8F3F-84430653CE17}"
+          DTS:ValueIndex="3"
+          DTS:VariableName="User::LaskutusAihe" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{5FEC4A60-59DB-4DAC-8525-BF586D8A77BE}"
+          DTS:ObjectName="{5FEC4A60-59DB-4DAC-8525-BF586D8A77BE}"
+          DTS:ValueIndex="4"
+          DTS:VariableName="User::PalveluViiteStr" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B986B967-6D00-4DEF-9655-F40F71F5C67E}"
+          DTS:ObjectName="{B986B967-6D00-4DEF-9655-F40F71F5C67E}"
+          DTS:ValueIndex="5"
+          DTS:VariableName="User::SanomaTyyppi" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{CB529CD7-5EEF-4C98-948C-F2E7A1D8188E}"
+          DTS:ObjectName="{CB529CD7-5EEF-4C98-948C-F2E7A1D8188E}"
+          DTS:ValueIndex="6"
+          DTS:VariableName="User::TxTano" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{64A86EEB-D12C-4337-A5F6-5E6CA8BA06E7}"
+          DTS:ObjectName="{64A86EEB-D12C-4337-A5F6-5E6CA8BA06E7}"
+          DTS:ValueIndex="7"
+          DTS:VariableName="User::VelNo" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{031FAF27-0ADC-48A9-91BD-0BAFCBDC1AD0}"
+          DTS:ObjectName="{031FAF27-0ADC-48A9-91BD-0BAFCBDC1AD0}"
+          DTS:ValueIndex="8"
+          DTS:VariableName="User::Aikaleima" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{3075B2BE-5A8D-41E5-BD0E-954041739B3A}"
+          DTS:ObjectName="{3075B2BE-5A8D-41E5-BD0E-954041739B3A}"
+          DTS:ValueIndex="9"
+          DTS:VariableName="User::HeTu2" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{FB24FBA8-65D5-4185-BA4B-6129E7DE90F5}"
+          DTS:ObjectName="{FB24FBA8-65D5-4185-BA4B-6129E7DE90F5}"
+          DTS:ValueIndex="10"
+          DTS:VariableName="User::Tiedosto" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LueEiCollectionSanomat"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{AB389004-3A25-4277-A3E8-E0E9DBAA891C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LueEiCollectionSanomat"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="insert into VERKKOLASKU.[RSI_SanomaPurettu_VIRHEET]&#xA;select * from verkkolaskutemp.RSI_SanomaPurettu&#xA;WHERE Laskutusaihe &lt;&gt;  'COLLECTION' &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LueOokooSanomat"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{2CA71E38-D8E8-4830-BFEC-4DD1F6AECFCE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LueOokooSanomat"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="  select coalesce([HeTu], '') as [HeTu]&#xA;    ,[VerkkolaskuOsoite]&#xA;      ,[ValittajanTunnus]&#xA;      ,[LaskutusAihe]&#xA;      ,coalesce(convert(nchar(30), [PalveluViite]), '') as palveluviite&#xA;      ,[SanomaTyyppi]&#xA;      ,[TxTano]&#xA;      ,[VelNo]&#xA;      ,[Aikaleima]&#xA;,coalesce(convert(nchar(30), [HeTu2]), '') as Hetu2&#xA;,tiedosto&#xA;  FROM [VERKKOLASKUTEMP].[RSI_SanomaPurettu]&#xA;where ((Sanomatyyppi &lt;&gt; 'DELETE' AND txtano &lt;&gt; '' and HeTu = HeTu2)&#xA;OR (Sanomatyyppi = 'DELETE'))&#xA;and Laskutusaihe = 'COLLECTION'&#xA;order by aikaleima"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ResultSet" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LueOokooSanomat 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{35F9F642-C9B2-40EA-BBEF-73376D26C98A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LueOokooSanomat 1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="select [HeTu]&#xA;      ,[VerkkolaskuOsoite]&#xA;      ,[ValittajanTunnus]&#xA;      ,[LaskutusAihe]&#xA;      ,[PalveluViite]&#xA;      ,[SanomaTyyppi]&#xA;      ,[TxTano]&#xA;      ,[VelNo]&#xA;      ,[Aikaleima]&#xA;  FROM [VERKKOLASKUTEMP].[RSI_SanomaPurettu]&#xA;where txtano &lt;&gt; '' and velno &lt;&gt; 0&#xA;order by aikaleima"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::Hetut" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="1"
+            SQLTask:DtsVariableName="User::VerkkolaskuOsoitteet" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="2"
+            SQLTask:DtsVariableName="User::Valittajantunnukset" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="3"
+            SQLTask:DtsVariableName="User::LaskutusAiheet" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="4"
+            SQLTask:DtsVariableName="User::Palveluviitteet" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="5"
+            SQLTask:DtsVariableName="User::SanomaTyypit" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="6"
+            SQLTask:DtsVariableName="User::TxTanot" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="7"
+            SQLTask:DtsVariableName="User::VelNot" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="8"
+            SQLTask:DtsVariableName="User::Aikaleimat" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LuePieleenMenneetSanomat"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{350EEB24-4B56-440C-9CD6-F01B869BE030}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LuePieleenMenneetSanomat"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="select coalesce([HeTu], '')&#xA;    ,[VerkkolaskuOsoite]&#xA;      ,[ValittajanTunnus]&#xA;      ,[LaskutusAihe]&#xA;      ,ltrim(coalesce(convert(nchar(30), [PalveluViite]), '0'))&#xA;      ,[SanomaTyyppi]&#xA;      ,[TxTano]&#xA;      ,[VelNo]&#xA;      ,[Aikaleima]&#xA;,coalesce([HeTu2],''),&#xA;tiedosto&#xA;  FROM [VERKKOLASKUTEMP].[RSI_SanomaPurettu]&#xA;WHERE Laskutusaihe = 'COLLECTION' AND ( (sanomatyyppi &lt;&gt; 'DELETE' AND txtano = '') &#xA;or (Sanomatyyppi &lt;&gt; 'DELETE' AND (HeTu &lt;&gt; HeTu2 or hetu2 is NULL))&#xA;OR hetu NOT IN (SELECT DISTINCT(hetu) &#xA;FROM VERKKOLASKU.Kuluttaja_Osoite))&#xA;order by aikaleima"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ResultSet2" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Onko Rivejä"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{11A342BD-5ECD-40EF-8CCB-33DA05DBB41D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Onko Rivejä"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="select count(*) from verkkolaskutemp.RSISanoma&#xA;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::riviLKM" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PaivitaVelno"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{71E9EC36-3713-4CC4-B85E-C74DE5E7C931}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PaivitaVelno"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="UPDATE VERKKOLASKUTEMP.RSI_SanomaPurettu&#xA;SET HeTu2 = xxx.hetu2&#xA;from&#xA;(&#xA;SELECT  vt.vtidtunnus hetu2,tv.TVVELNO vno, rsp.HeTu htunnus FROM VERKKOLASKUTEMP.RSI_SanomaPurettu rsp&#xA;LEFT JOIN CCS_ODS_FI.fi.tbtoitv tv ON Tv.txtano = rsp.TxTano&#xA;/*lisätty 20180524 : AND vt.vtidtunnus = rsp.hetu  */&#xA;LEFT JOIN ccs_ODS_FI.fi.TBVELVX vt  ON vt.VXVELNO = tv.TVVELNO AND vt.vtidtunnus = rsp.hetu&#xA;) xxx&#xA;WHERE xxx.hetu2 = hetu;&#xA;-- WHERE xxx.htunnus = hetu;&#xA;&#xA;UPDATE VERKKOLASKUTEMP.RSI_SanomaPurettu&#xA;SET velno = 0 where velno is null;&#xA;&#xA;UPDATE VERKKOLASKUTEMP.RSI_SanomaPurettu&#xA;SET palveluviite = 0 where palveluviite = '' or palveluviite is null;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tiedostoittain"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{FCA81196-CB6A-472D-A837-772089247F18}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tiedostoittain"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="select distinct(Tiedosto) from verkkolaskutemp.RSISanoma;"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::TiedostoNimet" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TyhjennaTaulut"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{5D950973-89F0-4A14-ABB0-8CF3B5EE605E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TyhjennaTaulut"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="truncate table [VERKKOLASKUTEMP].[RSISanoma];&#xA;truncate table [VERKKOLASKUTEMP].[RSI_SanomaPurettu];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateTxtano"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{C5E87042-9E86-4C49-8BBB-9798A4714224}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateTxtano"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A7F0330-9C74-4ECF-B2EC-E4F346B51AC2}"
+          SQLTask:SqlStatementSource="--20220520 PV, Added 0-padding for tano. Bug in tano joining.&#xA;-- removed atano logic as no longer in use.&#xA;&#xA;UPDATE VERKKOLASKUTEMP.RSI_SanomaPurettu &#xA;&#x9;SET TxTano = &#xA;&#x9;CASE WHEN TRY_CAST(PalveluViite AS VARCHAR(9)) IS NULL&#xA;&#x9;THEN '' --Castfailed&#xA;&#x9;ELSE FORMAT(PalveluViite,'D9')  --castsuccess &#xA;&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{15071039-E98F-47AF-810E-06209D45E592}"
+      DTS:From="Package\Foreach Loop Container 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\UpdateTxtano" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0DF70E96-CB5D-4713-9322-14DCE9B654BA}"
+      DTS:From="Package\Foreach Loop Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Onko Rivejä" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{FA43B312-DDFB-4E22-8397-20124C867757}"
+      DTS:From="Package\LuePieleenMenneetSanomat"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\LooppaaVirheellisetRivit" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{CAF080D1-9672-4EBD-ADE5-0FBD665EA927}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::riviLKM] &gt; 0"
+      DTS:From="Package\Onko Rivejä"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\Tiedostoittain" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{69329770-F796-460D-88FE-56B9F3F3DC49}"
+      DTS:From="Package\TyhjennaTaulut"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Foreach Loop Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{D64F0F68-416E-4BF8-991A-AD63F8631C39}"
+      DTS:From="Package\Tiedostoittain"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Foreach Loop Container 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{C298F10A-78DA-485D-B79D-8C36C7E14795}"
+      DTS:From="Package\LooppaaVirheellisetRivit"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\LueEiCollectionSanomat" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{DA3582E7-8639-4F50-A318-EE4099E0E449}"
+      DTS:From="Package\UpdateTxtano"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\PaivitaVelno" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{F4FCBC78-AEA4-48D0-A7B0-60BB29B70AFE}"
+      DTS:From="Package\PaivitaVelno"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\LueOokooSanomat" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{8061207F-7B3B-48E6-844E-8B8E702D6942}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\TyhjennaTaulut" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{8BD8CD4A-4CE7-46FA-99C6-1341334F3ABB}"
+      DTS:From="Package\LueOokooSanomat"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Foreach Loop Container 2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{89179FFA-E1D8-4DCD-8086-751FEEBBBB05}"
+      DTS:From="Package\Foreach Loop Container 2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\LuePieleenMenneetSanomat" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Execute SQL Task"
+          TopLeft="23,106" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Foreach Loop Container\ArkistoiTiedosto"
+          TopLeft="31,162" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Foreach Loop Container\LaskurinNollaus"
+          TopLeft="32,4" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Foreach Loop Container\Vie tauluun"
+          TopLeft="42,90" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="109,46">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="109,132">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="235,254"
+          Size="235,297"
+          Id="Package\Foreach Loop Container"
+          TopLeft="505,30" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Foreach Loop Container 1\YhdenTiedostonDatat"
+          TopLeft="29,31" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="243,128"
+          Size="243,171"
+          Id="Package\Foreach Loop Container 1"
+          TopLeft="179,289" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Foreach Loop Container 2\Expression Task"
+          TopLeft="56,16" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Foreach Loop Container 2\LisaaTaiPaivita"
+          TopLeft="344,101" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Foreach Loop Container 2\Lopeta"
+          TopLeft="58,177" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Foreach Loop Container 2\OrvotDeletet"
+          TopLeft="40,97" />
+        <NodeLayout
+          Size="112,42"
+          Id="Package\Foreach Loop Container 2\Paivita"
+          TopLeft="394,168" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Foreach Loop Container 2\VirheellinenLopetus"
+          TopLeft="30,242" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Foreach Loop Container 2\VirheellinenLopetus 1"
+          TopLeft="25.5,312" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint]"
+          TopLeft="110.083333333333,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,7.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 1]"
+          TopLeft="159.333333333333,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="259.666666666667,43"
+              Start="0,0"
+              End="259.666666666667,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.4602774274905" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.4602774274905"
+                    Point2="0,17.4602774274905"
+                    Point3="4,17.4602774274905" />
+                  <mssgle:LineSegment
+                    End="255.666666666667,17.4602774274905" />
+                  <mssgle:CubicBezierSegment
+                    Point1="255.666666666667,17.4602774274905"
+                    Point2="259.666666666667,17.4602774274905"
+                    Point3="259.666666666667,21.4602774274905" />
+                  <mssgle:LineSegment
+                    End="259.666666666667,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="121.833333333333,22.4602774274905,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 2]"
+          TopLeft="419,143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="31,25"
+              Start="0,0"
+              End="31,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.5"
+                    Point2="0,12.5"
+                    Point3="4,12.5" />
+                  <mssgle:LineSegment
+                    End="27,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27,12.5"
+                    Point2="31,12.5"
+                    Point3="31,16.5" />
+                  <mssgle:LineSegment
+                    End="31,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 3]"
+          TopLeft="115.5,219">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23"
+              Start="0,0"
+              End="0,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 4]"
+          TopLeft="116.5,284">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container 2.PrecedenceConstraints[Constraint 5]"
+          TopLeft="112.5,139">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="511,409"
+          Size="511,452"
+          Id="Package\Foreach Loop Container 2"
+          TopLeft="927,473" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\LooppaaVirheellisetRivit\Expression Task"
+          TopLeft="84,5" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\LooppaaVirheellisetRivit\LisaaVirheRiviDelete"
+          TopLeft="28,99" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\LooppaaVirheellisetRivit\LisaaVirheRiviMuu"
+          TopLeft="198,99" />
+        <EdgeLayout
+          Id="Package\LooppaaVirheellisetRivit.PrecedenceConstraints[Constraint]"
+          TopLeft="162.5,47">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-46.5,52"
+              Start="0,0"
+              End="-46.5,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22"
+                    Point2="0,26"
+                    Point3="-4,26" />
+                  <mssgle:LineSegment
+                    End="-42.5,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-42.5,26"
+                    Point2="-46.5,26"
+                    Point3="-46.5,30" />
+                  <mssgle:LineSegment
+                    End="-46.5,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-31.25,31,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\LooppaaVirheellisetRivit.PrecedenceConstraints[Constraint 1]"
+          TopLeft="187.333333333333,47">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93.6666666666667,52"
+              Start="0,0"
+              End="93.6666666666667,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.1147540983607" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.1147540983607"
+                    Point2="0,21.1147540983607"
+                    Point3="4,21.1147540983607" />
+                  <mssgle:LineSegment
+                    End="89.6666666666667,21.1147540983607" />
+                  <mssgle:CubicBezierSegment
+                    Point1="89.6666666666667,21.1147540983607"
+                    Point2="93.6666666666667,21.1147540983607"
+                    Point3="93.6666666666667,25.1147540983607" />
+                  <mssgle:LineSegment
+                    End="93.6666666666667,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="38.8333333333333,26.1147540983607,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="369,196"
+          Size="369,239"
+          Id="Package\LooppaaVirheellisetRivit"
+          TopLeft="995,1071" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\LueEiCollectionSanomat"
+          TopLeft="1090,1368" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\LueOokooSanomat"
+          TopLeft="986,349" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\LueOokooSanomat 1"
+          TopLeft="967,226" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\LuePieleenMenneetSanomat"
+          TopLeft="1101,974" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Onko Rivejä"
+          TopLeft="255,139" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\PaivitaVelno"
+          TopLeft="778,349" />
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Tiedostoittain"
+          TopLeft="222,215" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\TyhjennaTaulut"
+          TopLeft="213,40" />
+        <NodeLayout
+          Size="148,42"
+          Id="Package\UpdateTxtano"
+          TopLeft="455,350" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="422,372.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="33,0"
+              Start="0,0"
+              End="25.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="25.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="505,226.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-111,-66.6666666666667"
+              Start="0,0"
+              End="-103.5,-66.6666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-40.7568653717348,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-40.7568653717348,0"
+                    Point2="-44.7568653717348,0"
+                    Point3="-44.7568653717348,-4" />
+                  <mssgle:LineSegment
+                    End="-44.7568653717348,-62.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-44.7568653717348,-62.6666666666667"
+                    Point2="-44.7568653717348,-66.6666666666667"
+                    Point3="-48.7568653717348,-66.6666666666667" />
+                  <mssgle:LineSegment
+                    End="-103.5,-66.6666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="1182.75,1016">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="324.5,181">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-30,34"
+              Start="0,0"
+              End="-30,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="-4,17" />
+                  <mssgle:LineSegment
+                    End="-26,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-26,17"
+                    Point2="-30,17"
+                    Point3="-30,21" />
+                  <mssgle:LineSegment
+                    End="-30,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-23,22,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="378,61">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="127,69.3333333333333"
+              Start="0,0"
+              End="119.5,69.3333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="71.7916945746819,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="71.7916945746819,0"
+                    Point2="75.7916945746819,0"
+                    Point3="75.7916945746819,4" />
+                  <mssgle:LineSegment
+                    End="75.7916945746819,65.3333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="75.7916945746819,65.3333333333333"
+                    Point2="75.7916945746819,69.3333333333333"
+                    Point3="79.7916945746819,69.3333333333333" />
+                  <mssgle:LineSegment
+                    End="119.5,69.3333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="297.5,257">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1183,1310">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="603,370.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175,0"
+              Start="0,0"
+              End="167.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="167.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="918,370">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="68,0"
+              Start="0,0"
+              End="60.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="60.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="105.5,106">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="190,-24"
+              Start="0,0"
+              End="190,-16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-8"
+                    Point2="0,-12"
+                    Point3="4,-12" />
+                  <mssgle:LineSegment
+                    End="186,-12" />
+                  <mssgle:CubicBezierSegment
+                    Point1="186,-12"
+                    Point2="190,-12"
+                    Point3="190,-16" />
+                  <mssgle:LineSegment
+                    End="190,-16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="1073,391">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="109.5,82"
+              Start="0,0"
+              End="109.5,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37"
+                    Point2="0,41"
+                    Point3="4,41" />
+                  <mssgle:LineSegment
+                    End="105.5,41" />
+                  <mssgle:CubicBezierSegment
+                    Point1="105.5,41"
+                    Point2="109.5,41"
+                    Point3="109.5,45" />
+                  <mssgle:LineSegment
+                    End="109.5,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="1184.25,925">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Puretaan XM:t riveittäin &#xA;tauluun. Luettavat tiedostot&#xA;003701403514*.xml&#xA;- huom! polku ei lopullinen!!"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="181,88"
+          Id="d232892c-44c6-4f41-a4e9-24c9aa36cdb7"
+          TopLeft="708,60" />
+        <AnnotationLayout
+          Text="Etsitään taulusta tarvittavat datat&#xA;ja viedään tauluun&#xA;Pitääkö vielä tarkastaa että &#xA;vain &quot;COLLECTION&quot;? ==&gt; tarkastetaan"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="236,88"
+          Id="cba557ee-4fab-4355-8404-4df989da0eaf"
+          TopLeft="12,262" />
+        <AnnotationLayout
+          Text="Kaikki rivit mitkä &quot;ADD&quot; / &quot;CHANGE&quot; &#xA;lisätään varsinaaiseen tauluun&#xA;- lisää tarkastus onko jo???&#xA;HUOM! Päätöspäivä  = tallenuspäivä&#xA;po. muuttujasta"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="226,104"
+          Id="9e730a8b-7ceb-4b75-97b5-cd22e56d587a"
+          TopLeft="461,408" />
+        <AnnotationLayout
+          Text="PJ tarkastus?&#xA;tano + idtunnus&#xA;(päivitä sanomatyyppi&#xA;jos ei onnistu? ja sitten insertillä &#xA;nämä kantaan?)&#xA;"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="202,120"
+          Id="79c653ed-df96-4f56-84e0-3dc302f02fd5"
+          TopLeft="265,464" />
+        <AnnotationLayout
+          Text="HUOM! &#xA;DELETE KOHDISTETTAVA&#xA;- Hetu&#xA;- Päättymispäivä NULL&#xA;- vastaanotto-osoite&#xA;"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="163,120"
+          Id="408bf212-a4dd-4b8e-950d-4b7aef331f47"
+          TopLeft="491,514" />
+        <AnnotationLayout
+          Text="Mitäs jos samaan aikaan&#xA;käsitellään samalle hetulle&#xA;tulevia sanomia, toimiikohan?&#xA;Esim. Add + change?&#xA;Ja vielä jos delete, ei kai vain&#xA;käy niin että ei ole mitään &#xA;voimassa?&#xA;Voikohan tiedoston nimestä päätellä jotenkin&#xA;järjestyksen? vai tuossa soap-osan timestampistä?"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="295,168"
+          Id="bd0c2d2d-2101-4e05-b949-9802955a6ff0"
+          TopLeft="50,448" />
+        <AnnotationLayout
+          Text="Halutaan käytdä sanomat&#xA;läpi aikaleiman &#xA;mukaisessa järjestyksessä,&#xA;siksi tehty näin&#xA;Huom! Top 1000000 on&#xA;pakko olla, koska muuten&#xA;ei saa olla order by:tä"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="168,136"
+          Id="d9c7ac27-eeab-40fe-b76d-9a49c79eb138"
+          TopLeft="639,631" />
+        <AnnotationLayout
+          Text="ADD / CHANGE = Lisää&#xA;- päätä vanha (jos on)&#xA;- lisää uusi&#xA;&#xA;DELETE = Poista&#xA;- päätä vanha&#xA;&#xA;Virhe:&#xA;- lisää rivi, mutta laita &quot;NOT SAVED&quot; + &#xA;canceled täppä&#xA;"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="235,200"
+          Id="73f6dc8c-4ff8-4ba3-922f-1a55311a8c3d"
+          TopLeft="669,776" />
+        <AnnotationLayout
+          Text="\\intad1.com\data\DataMining\FI\VerkkoLasku"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="278,40"
+          Id="9fce822f-74f1-4ce4-873d-124e73f4f7b8"
+          TopLeft="774,18" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Vie tauluun">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination"
+          TopLeft="166,223" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Foreach Loop Container\Vie tauluun\Derived Column"
+          TopLeft="167,143" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Foreach Loop Container\Vie tauluun\Flat File Source"
+          TopLeft="172,66" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Vie tauluun.Paths[Flat File Source Output]"
+          TopLeft="246.75,108">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35"
+              Start="0,0"
+              End="0,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Vie tauluun.Paths[Derived Column Output]"
+          TopLeft="248.75,185">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Vie tauluun\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container 1\YhdenTiedostonDatat">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Foreach Loop Container 1\YhdenTiedostonDatat\PalveluviiteCheck"
+          TopLeft="487,251" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source"
+          TopLeft="497,62" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination"
+          TopLeft="484,324" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Foreach Loop Container 1\YhdenTiedostonDatat\Derived Column"
+          TopLeft="498,143" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container 1\YhdenTiedostonDatat.Paths[Derived Column Output1]"
+          TopLeft="569.25,293">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container 1\YhdenTiedostonDatat.Paths[Derived Column Output]"
+          TopLeft="576,185">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8,66"
+              Start="0,0"
+              End="-8,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29"
+                    Point2="0,33"
+                    Point3="-4,33" />
+                  <mssgle:LineSegment
+                    End="-4,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4,33"
+                    Point2="-8,33"
+                    Point3="-8,37" />
+                  <mssgle:LineSegment
+                    End="-8,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container 1\YhdenTiedostonDatat.Paths[OLE DB Source Output]"
+          TopLeft="574.5,104">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container 1\YhdenTiedostonDatat\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,3180 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/7/2018 8:00:06 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LTR90NC4F2"
+  DTS:CreatorName="GROUPAD1\kaijahe"
+  DTS:DTSID="{5B7BD849-AD26-41F0-B964-A829B93BD56F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1035"
+  DTS:ObjectName="VerkkolaskuVirheet"
+  DTS:PackageType="5"
+  DTS:VersionBuild="65"
+  DTS:VersionGUID="{A8908D6A-6D87-4807-9BFA-540322BCFAAA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{077CA2C6-D902-44A7-9977-E7D3BCADF8BF}"
+      DTS:ObjectName="AG-ODS-PROD.CCS_OPERATIONAL 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=lwsqltst012;Initial Catalog=CCS_OPERATIONAL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-VerkkolaskuVirheet-{077CA2C6-D902-44A7-9977-E7D3BCADF8BF}AG-ODS-PROD.CCS_OPERATIONAL 1;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[output_CSV]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{742621AB-D1FE-4903-965A-E6CE8CD59988}"
+      DTS:ObjectName="output_CSV">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"\\\\intad1.com\\data\\TaskManagement_FI\\Karhut_verkkolaskuvirheet_" +  (DT_WSTR,4)DATEPART("yyyy",GetDate()) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("mm",GetDate()) ,2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
+RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) + 
+RIGHT("0" + (DT_WSTR,2)DATEPART("ss",GetDate()),2)+ ".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\intad1.com\data\TaskManagement_FI\Karhut_verkkolaskuvirheet_2025_03_06_142950.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tano"
+              DTS:DTSID="{AC3D415F-2BE5-4226-AE77-C0C98E844996}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Vsno"
+              DTS:DTSID="{C1D76608-9090-43A0-A5DB-9C39ED9A3E6A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Karhun pvm"
+              DTS:DTSID="{537BFFE4-E31F-4B1A-A628-E1DF13D1B886}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="304"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Virheen pvm"
+              DTS:DTSID="{1F37D52C-6ECB-4706-96EC-6F1B27949F6F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Virhekoodi"
+              DTS:DTSID="{7042CACA-5CDB-4D59-BEBA-30DF5BBED09E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="700"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Virheteksti"
+              DTS:DTSID="{745FB05B-5055-48AE-9377-2688BEFCC84C}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[output_MS_CSV]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{C25905DA-E51D-4EA8-8528-278419A987C3}"
+      DTS:ObjectName="output_MS_CSV">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"\\\\intad1.com\\data\\TaskManagement_FI\\Maksusuunnitelma_verkkolaskuvirheet_" +  (DT_WSTR,4)DATEPART("yyyy",GetDate()) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("mm",GetDate()) ,2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
+RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) + 
+RIGHT("0" + (DT_WSTR,2)DATEPART("ss",GetDate()),2)+ ".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\intad1.com\data\TaskManagement_FI\Maksusuunnitelma_verkkolaskuvirheet_2025_03_06_142950.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Msnro"
+              DTS:DTSID="{CF955FE9-D8A9-4955-B591-521BBEC67610}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="131"
+              DTS:DataPrecision="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Kirjetyyppi"
+              DTS:DTSID="{EE56292D-5572-4BA1-B1A3-7D4DB206D8B9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="131"
+              DTS:DataPrecision="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Eranro"
+              DTS:DTSID="{9842D063-5433-41BC-BB4C-BE3CAE819F3B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="131"
+              DTS:DataPrecision="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Kirjeen pvm"
+              DTS:DTSID="{6C19E64D-0CE2-4D69-B945-CD8CB9FA5BF6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="304"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Virheen pvm"
+              DTS:DTSID="{A63F1BEF-F79B-4860-8FBF-1C7EC37805EF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Virhekoodi"
+              DTS:DTSID="{0B3F9A60-C706-4602-89C8-A3E805485EBA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="700"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Virheteksti"
+              DTS:DTSID="{6DFE0793-80EF-433A-8606-DC68F78AEA56}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="150"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tiedosto"
+              DTS:DTSID="{2D626532-E13A-4077-9273-48776CC1865F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[output_MS_txt]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{8B44838F-7607-49C1-9545-7C55D6A620FF}"
+      DTS:ObjectName="output_MS_txt">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"\\\\intad1.com\\data\\Conversions\\CollectionSystem\\eInvoice\\FI\\Maksusuunnitelmat\\Virheet\\Maksusuunnitelma_verkkolaskuvirheet_" +  (DT_WSTR,4)DATEPART("yyyy",GetDate()) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("mm",GetDate()) ,2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
+RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) + 
+RIGHT("0" + (DT_WSTR,2)DATEPART("ss",GetDate()),2)+ ".txt"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="FixedWidth"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\intad1.com\data\Conversions\CollectionSystem\eInvoice\FI\Maksusuunnitelmat\Virheet\Maksusuunnitelma_verkkolaskuvirheet_2025_03_06_142950.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="8"
+              DTS:MaximumWidth="8"
+              DTS:DataType="129"
+              DTS:ObjectName="A"
+              DTS:DTSID="{19D2EE19-617F-489D-BA5C-87EA69F46659}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="2"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:ObjectName="B"
+              DTS:DTSID="{56108601-DA8E-466E-9D44-88A5B7C7F7FB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="2"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:ObjectName="C"
+              DTS:DTSID="{3FE84491-492C-4F12-B7EF-3A92EFA1208D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="6"
+              DTS:MaximumWidth="6"
+              DTS:DataType="129"
+              DTS:ObjectName="D"
+              DTS:DTSID="{D5617EA9-3FE1-4F1C-BC88-A1A0110C6ABA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="1"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:ObjectName="E"
+              DTS:DTSID="{5B3208D6-6C69-48F2-820D-FC828B30FA5C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="1"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="F"
+              DTS:DTSID="{77607EAF-AA34-491D-B0AB-A3AE2C6D8FB1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="2"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:ObjectName="rowdelimiter"
+              DTS:DTSID="{7D27047F-FEFE-4ABE-AFC9-3CDEEC9AB7D3}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[output_MS_txt2]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{5081F1C7-8242-405C-ACCC-2F01E8048152}"
+      DTS:ObjectName="output_MS_txt2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="RaggedRight"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter="_x000D__x000A_"
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\intad1.com\data\Conversions\CollectionSystem\eInvoice\FI\Maksusuunnitelmat\Virheet\Maksusuunnitelma_verkkolaskuvirheet_2019_05_29_074331.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="8"
+              DTS:MaximumWidth="8"
+              DTS:DataType="129"
+              DTS:ObjectName="Column 0"
+              DTS:DTSID="{1B719A63-9C9A-4AB1-A8EF-D9FF51228CF8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="2"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:ObjectName="Column 1"
+              DTS:DTSID="{BC290691-3CA8-4604-A27B-AA48B1E590A8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="2"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:ObjectName="Column 2"
+              DTS:DTSID="{DCDC7A5E-053B-4D6C-9E1E-A8365951C059}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="6"
+              DTS:MaximumWidth="6"
+              DTS:DataType="129"
+              DTS:ObjectName="Column 3"
+              DTS:DTSID="{3DD58531-7328-42D7-9EB6-027FFFE97D54}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="1"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:ObjectName="Column 4"
+              DTS:DTSID="{B4D11ABA-524F-43C5-B1AE-312251F38FDF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="2"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:ObjectName="Column 5"
+              DTS:DTSID="{AA260B5A-5AC1-4F54-874F-A350A5826B2E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 6"
+              DTS:DTSID="{965A35CB-0C2A-4228-B297-DEA14E88F5AF}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[output_txt]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{A0C6501A-35A8-4445-9396-64DAA55A3583}"
+      DTS:ObjectName="output_txt">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"\\\\intad1.com\\data\\Conversions\\CollectionSystem\\eInvoice\\FI\\Karhut\\Virheet\\Karhuhistoria_verkkolaskuvirheet_" +  (DT_WSTR,4)DATEPART("yyyy",GetDate()) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("mm",GetDate()) ,2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + "_" +
+RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
+RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) + 
+RIGHT("0" + (DT_WSTR,2)DATEPART("ss",GetDate()),2)+ ".txt"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="FixedWidth"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\intad1.com\data\Conversions\CollectionSystem\eInvoice\FI\Karhut\Virheet\Karhuhistoria_verkkolaskuvirheet_2025_03_06_142950.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="9"
+              DTS:MaximumWidth="9"
+              DTS:DataType="129"
+              DTS:ObjectName="A"
+              DTS:DTSID="{14311C4D-AC85-4F48-AB30-C2438586208B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="2"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:ObjectName="B"
+              DTS:DTSID="{163C1ABA-093B-485A-92C0-AB024B419265}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="6"
+              DTS:MaximumWidth="6"
+              DTS:DataType="129"
+              DTS:ObjectName="C"
+              DTS:DTSID="{C9B928C1-438A-424C-8C0A-2671355EE688}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="1"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:ObjectName="D"
+              DTS:DTSID="{FF11BBA5-A71B-48F4-8944-E08E8C3CDFB4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="2"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="E"
+              DTS:DTSID="{9AC1418C-D85B-4386-98A8-480DBC7B08C7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter=""
+              DTS:ColumnWidth="2"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:ObjectName="rowdelimiter"
+              DTS:DTSID="{05F5FA52-1853-426F-8E91-FB81D2C417D2}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B7BC5446-69D2-4B92-B170-C28ED5B7D057}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="riviLkm">
+      <DTS:VariableValue
+        DTS:DataType="20">5</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\MuodostaRaportti_1_txt"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CEA0AACC-2249-4F15-91C3-C36DFFF57111}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MuodostaRaportti_1_txt"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\MuodostaRaportti_1_txt\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\MuodostaRaportti_1_txt\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Derived Column.Inputs[Derived Column Input].Columns[Letter]"
+                      cachedDataType="wstr"
+                      cachedLength="70"
+                      cachedName="Letter"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\MuodostaRaportti_1_txt\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[tano]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="70"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[tano]"
+                      name="tano"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[SUBSTRING](#{Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]},[FINDSTRING](#{Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]},"_",1) + 1,[LEN](#{Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]}) - (8 + [FINDSTRING](#{Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]},"_",1)))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">SUBSTRING(Letter,FINDSTRING(Letter,"_",1) + 1,LEN(Letter) - (8 + FINDSTRING(Letter,"_",1)))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[velno]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[velno]"
+                      name="velno"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REVERSE]([SUBSTRING]([REVERSE](#{Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]}),7,2))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REVERSE(SUBSTRING(REVERSE(Letter),7,2))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[karhupvm]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[karhupvm]"
+                      name="karhupvm"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[SUBSTRING](#{Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]},[LEN](#{Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]}) - 5,6)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">SUBSTRING(Letter,LEN(Letter) - 5,6)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[Vakio1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[Vakio1]"
+                      name="Vakio1"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"F"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"F"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[Vakio2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[Vakio2]"
+                      name="Vakio2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"  "</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"  "</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[RiviVaihto]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[RiviVaihto]"
+                      name="RiviVaihto"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,2,1252)"\r\n"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,2,1252)"\r\n"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\MuodostaRaportti_1_txt\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MuodostaRaportti_1_txt\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1035"
+              name="Flat File Destination"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[output_txt]"
+                  connectionManagerRefId="Package.ConnectionManagers[output_txt]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[tano]"
+                      cachedDataType="wstr"
+                      cachedLength="70"
+                      cachedName="tano"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[A]"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[tano]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[velno]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="velno"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[B]"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[velno]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[karhupvm]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="karhupvm"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[C]"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[karhupvm]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[Vakio1]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Vakio1"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[D]"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[Vakio1]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[Vakio2]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="Vakio2"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[E]"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[Vakio2]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[RiviVaihto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="RiviVaihto"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[rowdelimiter]"
+                      lineageId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output].Columns[RiviVaihto]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[A]"
+                      codePage="1252"
+                      dataType="str"
+                      length="9"
+                      name="A" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[B]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="B" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[C]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="C" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[D]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="D" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[E]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="E" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[rowdelimiter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="rowdelimiter" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\MuodostaRaportti_1_txt\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select [CreatedTimestamp]
+      ,[FromSender]
+      ,[FromIntermediator]
+      ,[ToReceiver]
+      ,[ToIntermediator]
+      ,[Letter]
+      ,[ErrorCode] as [Errorkoodi]
+      ,[ErrorText] 
+      ,[ReportedTimestamp]
+      ,[Reported]
+from [VERKKOLASKU].[VerkkolaskuVirheet]
+where Reported = 1
+and letter like 'COL%'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedTimestamp]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedTimestamp]"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedTimestamp]"
+                      name="CreatedTimestamp"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[FromSender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FromSender]"
+                      length="35"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[FromSender]"
+                      name="FromSender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[FromIntermediator]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FromIntermediator]"
+                      length="35"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[FromIntermediator]"
+                      name="FromIntermediator"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[ToReceiver]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ToReceiver]"
+                      length="50"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[ToReceiver]"
+                      name="ToReceiver"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[ToIntermediator]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ToIntermediator]"
+                      length="50"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[ToIntermediator]"
+                      name="ToIntermediator"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Letter]"
+                      length="70"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]"
+                      name="Letter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Errorkoodi]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Errorkoodi]"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Errorkoodi]"
+                      name="Errorkoodi"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorText]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorText]"
+                      length="700"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorText]"
+                      name="ErrorText"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReportedTimestamp]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReportedTimestamp]"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReportedTimestamp]"
+                      name="ReportedTimestamp"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Reported]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Reported]"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Reported]"
+                      name="Reported"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedTimestamp]"
+                      dataType="dbTimeStamp2"
+                      name="CreatedTimestamp"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FromSender]"
+                      dataType="wstr"
+                      length="35"
+                      name="FromSender" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FromIntermediator]"
+                      dataType="wstr"
+                      length="35"
+                      name="FromIntermediator" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ToReceiver]"
+                      dataType="wstr"
+                      length="50"
+                      name="ToReceiver" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ToIntermediator]"
+                      dataType="wstr"
+                      length="50"
+                      name="ToIntermediator" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Letter]"
+                      dataType="wstr"
+                      length="70"
+                      name="Letter" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Errorkoodi]"
+                      dataType="i4"
+                      name="Errorkoodi" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorText]"
+                      dataType="wstr"
+                      length="700"
+                      name="ErrorText" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReportedTimestamp]"
+                      dataType="dbTimeStamp2"
+                      name="ReportedTimestamp"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Reported]"
+                      dataType="ui1"
+                      name="Reported" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedTimestamp]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedTimestamp]"
+                      name="CreatedTimestamp"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FromSender]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FromSender]"
+                      name="FromSender" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FromIntermediator]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FromIntermediator]"
+                      name="FromIntermediator" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ToReceiver]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ToReceiver]"
+                      name="ToReceiver" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ToIntermediator]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ToIntermediator]"
+                      name="ToIntermediator" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Letter]"
+                      dataType="wstr"
+                      length="70"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Letter]"
+                      name="Letter" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Errorkoodi]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Errorkoodi]"
+                      name="Errorkoodi" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorText]"
+                      dataType="wstr"
+                      length="700"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorText]"
+                      name="ErrorText" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReportedTimestamp]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReportedTimestamp]"
+                      name="ReportedTimestamp"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Reported]"
+                      dataType="ui1"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Reported]"
+                      name="Reported" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MuodostaRaportti_1_txt.Paths[Derived Column Output]"
+              endId="Package\MuodostaRaportti_1_txt\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="Derived Column Output"
+              startId="Package\MuodostaRaportti_1_txt\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\MuodostaRaportti_1_txt.Paths[OLE DB Source Output]"
+              endId="Package\MuodostaRaportti_1_txt\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\MuodostaRaportti_1_txt\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\MuodostaRaportti_2_csv"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{24594660-7AB4-463E-8C3D-5DB718D21BB4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MuodostaRaportti_2_csv"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\MuodostaRaportti_2_csv\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\MuodostaRaportti_2_csv\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Derived Column.Inputs[Derived Column Input].Columns[Letter]"
+                      cachedDataType="wstr"
+                      cachedLength="70"
+                      cachedName="Letter"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\MuodostaRaportti_2_csv\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output].Columns[tano]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="70"
+                      lineageId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output].Columns[tano]"
+                      name="tano"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[SUBSTRING](#{Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]},[FINDSTRING](#{Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]},"_",1) + 1,[LEN](#{Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]}) - (8 + [FINDSTRING](#{Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]},"_",1)))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">SUBSTRING(Letter,FINDSTRING(Letter,"_",1) + 1,LEN(Letter) - (8 + FINDSTRING(Letter,"_",1)))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output].Columns[velno]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output].Columns[velno]"
+                      name="velno"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REVERSE]([SUBSTRING]([REVERSE](#{Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]}),7,2))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REVERSE(SUBSTRING(REVERSE(Letter),7,2))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output].Columns[karhupvm]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output].Columns[karhupvm]"
+                      name="karhupvm"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[SUBSTRING](#{Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]},[LEN](#{Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]}) - 5,6)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">SUBSTRING(Letter,LEN(Letter) - 5,6)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\MuodostaRaportti_2_csv\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MuodostaRaportti_2_csv\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1035"
+              name="Flat File Destination"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[output_CSV]"
+                  connectionManagerRefId="Package.ConnectionManagers[output_CSV]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[tano]"
+                      cachedDataType="wstr"
+                      cachedLength="70"
+                      cachedName="tano"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Tano]"
+                      lineageId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output].Columns[tano]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[velno]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="velno"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Vsno]"
+                      lineageId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output].Columns[velno]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[karhupvm]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="karhupvm"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Karhun pvm]"
+                      lineageId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output].Columns[karhupvm]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[Errorkoodi]"
+                      cachedDataType="i4"
+                      cachedName="Errorkoodi"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virhekoodi]"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Errorkoodi]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorText]"
+                      cachedDataType="wstr"
+                      cachedLength="700"
+                      cachedName="ErrorText"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virheteksti]"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorText]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[reportedtimestamp]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="reportedtimestamp"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virheen pvm]"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[reportedtimestamp]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Tano]"
+                      dataType="wstr"
+                      length="50"
+                      name="Tano" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Vsno]"
+                      dataType="numeric"
+                      name="Vsno"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Karhun pvm]"
+                      dataType="wstr"
+                      length="50"
+                      name="Karhun pvm" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virheen pvm]"
+                      dataType="dbTimeStamp2"
+                      name="Virheen pvm" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virhekoodi]"
+                      dataType="numeric"
+                      name="Virhekoodi"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virheteksti]"
+                      dataType="wstr"
+                      length="700"
+                      name="Virheteksti" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\MuodostaRaportti_2_csv\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select [CreatedTimestamp]
+      ,[FromSender]
+      ,[FromIntermediator]
+      ,[ToReceiver]
+      ,[ToIntermediator]
+      ,[Letter]
+      ,[ErrorCode] as [Errorkoodi]
+      ,[ErrorText] 
+      ,reportedtimestamp
+      ,[Reported]
+from [VERKKOLASKU].[VerkkolaskuVirheet]
+where Reported = 1
+and letter like 'COL%'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedTimestamp]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedTimestamp]"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedTimestamp]"
+                      name="CreatedTimestamp"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[FromSender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FromSender]"
+                      length="35"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[FromSender]"
+                      name="FromSender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[FromIntermediator]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FromIntermediator]"
+                      length="35"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[FromIntermediator]"
+                      name="FromIntermediator"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[ToReceiver]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ToReceiver]"
+                      length="50"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[ToReceiver]"
+                      name="ToReceiver"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[ToIntermediator]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ToIntermediator]"
+                      length="50"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[ToIntermediator]"
+                      name="ToIntermediator"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Letter]"
+                      length="70"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Letter]"
+                      name="Letter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Errorkoodi]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Errorkoodi]"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Errorkoodi]"
+                      name="Errorkoodi"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorText]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorText]"
+                      length="700"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorText]"
+                      name="ErrorText"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[reportedtimestamp]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[reportedtimestamp]"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[reportedtimestamp]"
+                      name="reportedtimestamp"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Reported]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Reported]"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Reported]"
+                      name="Reported"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedTimestamp]"
+                      dataType="dbTimeStamp2"
+                      name="CreatedTimestamp"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FromSender]"
+                      dataType="wstr"
+                      length="35"
+                      name="FromSender" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FromIntermediator]"
+                      dataType="wstr"
+                      length="35"
+                      name="FromIntermediator" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ToReceiver]"
+                      dataType="wstr"
+                      length="50"
+                      name="ToReceiver" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ToIntermediator]"
+                      dataType="wstr"
+                      length="50"
+                      name="ToIntermediator" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Letter]"
+                      dataType="wstr"
+                      length="70"
+                      name="Letter" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Errorkoodi]"
+                      dataType="i4"
+                      name="Errorkoodi" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorText]"
+                      dataType="wstr"
+                      length="700"
+                      name="ErrorText" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[reportedtimestamp]"
+                      dataType="dbTimeStamp2"
+                      name="reportedtimestamp"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Reported]"
+                      dataType="ui1"
+                      name="Reported" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedTimestamp]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedTimestamp]"
+                      name="CreatedTimestamp"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FromSender]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FromSender]"
+                      name="FromSender" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FromIntermediator]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FromIntermediator]"
+                      name="FromIntermediator" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ToReceiver]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ToReceiver]"
+                      name="ToReceiver" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ToIntermediator]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ToIntermediator]"
+                      name="ToIntermediator" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Letter]"
+                      dataType="wstr"
+                      length="70"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Letter]"
+                      name="Letter" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Errorkoodi]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Errorkoodi]"
+                      name="Errorkoodi" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorText]"
+                      dataType="wstr"
+                      length="700"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorText]"
+                      name="ErrorText" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[reportedtimestamp]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[reportedtimestamp]"
+                      name="reportedtimestamp"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Reported]"
+                      dataType="ui1"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Reported]"
+                      name="Reported" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MuodostaRaportti_2_csv.Paths[Derived Column Output]"
+              endId="Package\MuodostaRaportti_2_csv\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="Derived Column Output"
+              startId="Package\MuodostaRaportti_2_csv\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\MuodostaRaportti_2_csv.Paths[OLE DB Source Output]"
+              endId="Package\MuodostaRaportti_2_csv\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\MuodostaRaportti_2_csv\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\MuodostaRaportti_3_txt"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{ADB9B9D1-A018-4495-91D3-5DF21272AE7F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MuodostaRaportti_3_txt"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\MuodostaRaportti_3_txt\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\MuodostaRaportti_3_txt\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\MuodostaRaportti_3_txt\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Output].Columns[rivinvaihto]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Output].Columns[rivinvaihto]"
+                      name="rivinvaihto"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,2,1252)"\r\n"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,2,1252)"\r\n"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\MuodostaRaportti_3_txt\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MuodostaRaportti_3_txt\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1035"
+              name="Flat File Destination"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[output_MS_txt]"
+                  connectionManagerRefId="Package.ConnectionManagers[output_MS_txt]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[Msunro]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="Msunro"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[A]"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Msunro]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[kirjetyyppi]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="kirjetyyppi"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[B]"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[kirjetyyppi]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[eranro]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="eranro"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[C]"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[eranro]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[pvm]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="pvm"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[D]"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[pvm]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[toimitustapa]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="toimitustapa"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[E]"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[toimitustapa]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[lajittelu]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="lajittelu"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[F]"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[lajittelu]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].Columns[rivinvaihto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="rivinvaihto"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[rowdelimiter]"
+                      lineageId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Output].Columns[rivinvaihto]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[A]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="A" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[B]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="B" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[C]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="C" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[D]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="D" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[E]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="E" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[F]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="F" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[rowdelimiter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="rowdelimiter" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\MuodostaRaportti_3_txt\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select 
+    substring(letter, 4,8) as Msunro 
+ , substring(letter, len(letter) -9, 2) as kirjetyyppi
+, substring(letter, len(letter) - 7, 2) as eranro
+, substring(letter, len(letter) - 5, 6) as pvm
+,  'F' as toimitustapa
+, '' as lajittelu
+from [VERKKOLASKU].[VerkkolaskuVirheet]
+where Reported = 1
+and letter like 'MS__%'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Msunro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Msunro]"
+                      length="8"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[Msunro]"
+                      name="Msunro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[kirjetyyppi]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[kirjetyyppi]"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[kirjetyyppi]"
+                      name="kirjetyyppi"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[eranro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[eranro]"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[eranro]"
+                      name="eranro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[pvm]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pvm]"
+                      length="6"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[pvm]"
+                      name="pvm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[toimitustapa]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[toimitustapa]"
+                      length="1"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[toimitustapa]"
+                      name="toimitustapa"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[lajittelu]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lajittelu]"
+                      length="1"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].Columns[lajittelu]"
+                      name="lajittelu"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Msunro]"
+                      dataType="wstr"
+                      length="8"
+                      name="Msunro" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[kirjetyyppi]"
+                      dataType="wstr"
+                      length="2"
+                      name="kirjetyyppi" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[eranro]"
+                      dataType="wstr"
+                      length="2"
+                      name="eranro" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pvm]"
+                      dataType="wstr"
+                      length="6"
+                      name="pvm" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[toimitustapa]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="toimitustapa" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lajittelu]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="lajittelu" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Msunro]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Msunro]"
+                      name="Msunro" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[kirjetyyppi]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[kirjetyyppi]"
+                      name="kirjetyyppi" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[eranro]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[eranro]"
+                      name="eranro" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pvm]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pvm]"
+                      name="pvm" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[toimitustapa]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[toimitustapa]"
+                      name="toimitustapa" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lajittelu]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lajittelu]"
+                      name="lajittelu" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MuodostaRaportti_3_txt.Paths[Derived Column Output]"
+              endId="Package\MuodostaRaportti_3_txt\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="Derived Column Output"
+              startId="Package\MuodostaRaportti_3_txt\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\MuodostaRaportti_3_txt.Paths[OLE DB Source Output]"
+              endId="Package\MuodostaRaportti_3_txt\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\MuodostaRaportti_3_txt\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\MuodostaRaportti_4_csv"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0A811315-13FE-443B-A568-5DA087D164CA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MuodostaRaportti_4_csv"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\MuodostaRaportti_4_csv\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1035"
+              name="Flat File Destination"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[output_MS_CSV]"
+                  connectionManagerRefId="Package.ConnectionManagers[output_MS_CSV]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[kirjetyyppi]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="kirjetyyppi"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Kirjetyyppi]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[kirjetyyppi]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[eranro]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="eranro"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Eranro]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[eranro]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[Msunro]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="Msunro"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Msnro]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Msunro]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[pvm]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="pvm"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Kirjeen pvm]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[pvm]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[reportedtimestamp]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="reportedtimestamp"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virheen pvm]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[reportedtimestamp]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[errorcode]"
+                      cachedDataType="i4"
+                      cachedName="errorcode"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virhekoodi]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[errorcode]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[errortext]"
+                      cachedDataType="wstr"
+                      cachedLength="700"
+                      cachedName="errortext"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virheteksti]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[errortext]" />
+                    <inputColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].Columns[inputfile]"
+                      cachedDataType="wstr"
+                      cachedLength="300"
+                      cachedName="inputfile"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Tiedosto]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[inputfile]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Msnro]"
+                      dataType="wstr"
+                      length="50"
+                      name="Msnro" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Kirjetyyppi]"
+                      dataType="numeric"
+                      name="Kirjetyyppi"
+                      precision="2" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Eranro]"
+                      dataType="numeric"
+                      name="Eranro"
+                      precision="2" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Kirjeen pvm]"
+                      dataType="numeric"
+                      name="Kirjeen pvm"
+                      precision="6" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virheen pvm]"
+                      dataType="dbTimeStamp2"
+                      name="Virheen pvm" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virhekoodi]"
+                      dataType="numeric"
+                      name="Virhekoodi"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Virheteksti]"
+                      dataType="wstr"
+                      length="700"
+                      name="Virheteksti" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Tiedosto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="Tiedosto" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\MuodostaRaportti_4_csv\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select 
+    substring(letter, 4,8) as Msunro 
+ , substring(letter, len(letter) -9, 2) as kirjetyyppi
+, substring(letter, len(letter) - 7, 2) as eranro
+, substring(letter, len(letter) - 5, 6) as pvm
+, reportedtimestamp
+, errorcode
+, errortext
+, inputfile
+from [VERKKOLASKU].[VerkkolaskuVirheet]
+where Reported = 1
+and letter like 'MS__%'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Msunro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Msunro]"
+                      length="8"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[Msunro]"
+                      name="Msunro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[kirjetyyppi]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[kirjetyyppi]"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[kirjetyyppi]"
+                      name="kirjetyyppi"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[eranro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[eranro]"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[eranro]"
+                      name="eranro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[pvm]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pvm]"
+                      length="6"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[pvm]"
+                      name="pvm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[reportedtimestamp]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[reportedtimestamp]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[reportedtimestamp]"
+                      name="reportedtimestamp"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[errorcode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[errorcode]"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[errorcode]"
+                      name="errorcode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[errortext]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[errortext]"
+                      length="700"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[errortext]"
+                      name="errortext"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[inputfile]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[inputfile]"
+                      length="300"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].Columns[inputfile]"
+                      name="inputfile"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Msunro]"
+                      dataType="wstr"
+                      length="8"
+                      name="Msunro" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[kirjetyyppi]"
+                      dataType="wstr"
+                      length="2"
+                      name="kirjetyyppi" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[eranro]"
+                      dataType="wstr"
+                      length="2"
+                      name="eranro" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[pvm]"
+                      dataType="wstr"
+                      length="6"
+                      name="pvm" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[reportedtimestamp]"
+                      dataType="dbTimeStamp2"
+                      name="reportedtimestamp"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[errorcode]"
+                      dataType="i4"
+                      name="errorcode" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[errortext]"
+                      dataType="wstr"
+                      length="700"
+                      name="errortext" />
+                    <externalMetadataColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[inputfile]"
+                      dataType="wstr"
+                      length="300"
+                      name="inputfile" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Msunro]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Msunro]"
+                      name="Msunro" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[kirjetyyppi]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[kirjetyyppi]"
+                      name="kirjetyyppi" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[eranro]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[eranro]"
+                      name="eranro" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pvm]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[pvm]"
+                      name="pvm" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[reportedtimestamp]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[reportedtimestamp]"
+                      name="reportedtimestamp"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[errorcode]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[errorcode]"
+                      name="errorcode" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[errortext]"
+                      dataType="wstr"
+                      length="700"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[errortext]"
+                      name="errortext" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[inputfile]"
+                      dataType="wstr"
+                      length="300"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[inputfile]"
+                      name="inputfile" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MuodostaRaportti_4_csv.Paths[OLE DB Source Output]"
+              endId="Package\MuodostaRaportti_4_csv\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\MuodostaRaportti_4_csv\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\RiviMaara"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{C28409E8-59E5-4E06-B27C-865B6D85AA30}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="RiviMaara"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{077CA2C6-D902-44A7-9977-E7D3BCADF8BF}"
+          SQLTask:SqlStatementSource="select count(*)  as rivilkm from verkkolasku.verkkolaskuvirheet&#xA;where reportedtimestamp is null;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::riviLkm" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateRaportoidut"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{76A36A28-2080-48B1-8C4F-7E8A11673CFD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateRaportoidut"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{077CA2C6-D902-44A7-9977-E7D3BCADF8BF}"
+          SQLTask:SqlStatementSource="update verkkolasku.verkkolaskuvirheet&#xA;set ReportedTimestamp = getdate(), Reported = 3&#xA;where reported = 1;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateRaportoidutInit"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{695B0B82-6201-4E5B-AABB-863C0FC56157}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateRaportoidutInit"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{077CA2C6-D902-44A7-9977-E7D3BCADF8BF}"
+          SQLTask:SqlStatementSource="update verkkolasku.verkkolaskuvirheet&#xA;set  Reported = 1&#xA;where reportedtimestamp is null;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{51251AF9-8583-49C6-AF29-FDD8F5EC4EBC}"
+      DTS:From="Package\MuodostaRaportti_2_csv"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\MuodostaRaportti_1_txt" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C211517A-C00D-418A-8EDF-3FE2E2187A9D}"
+      DTS:From="Package\MuodostaRaportti_1_txt"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\MuodostaRaportti_3_txt" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{77FDD78E-977F-4C6A-84CE-EEA7F6B328ED}"
+      DTS:From="Package\UpdateRaportoidutInit"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\MuodostaRaportti_2_csv" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{49F2E90B-7022-4E23-9BCA-8579B35123B7}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::riviLkm]&gt;0"
+      DTS:From="Package\RiviMaara"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\UpdateRaportoidutInit" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{A58C3924-B086-4ECD-B600-DDDF95598A86}"
+      DTS:From="Package\MuodostaRaportti_3_txt"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\MuodostaRaportti_4_csv" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{75932477-C787-4584-97A6-44EBC49B2BB5}"
+      DTS:From="Package\MuodostaRaportti_4_csv"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\UpdateRaportoidut" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="194,42"
+          Id="Package\MuodostaRaportti_1_txt"
+          TopLeft="167,153" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\MuodostaRaportti_2_csv"
+          TopLeft="164,75" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\MuodostaRaportti_3_txt"
+          TopLeft="168,236" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\MuodostaRaportti_4_csv"
+          TopLeft="165,316" />
+        <NodeLayout
+          Size="127,42"
+          Id="Package\RiviMaara"
+          TopLeft="490,35" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\UpdateRaportoidut"
+          TopLeft="188,412" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\UpdateRaportoidutInit"
+          TopLeft="166,5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="262.5,117">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="264,195">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="259.75,47">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="490,56">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-139,-30"
+              Start="0,0"
+              End="-131.5,-30">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-65.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-65.5,0"
+                    Point2="-69.5,0"
+                    Point3="-69.5,-4" />
+                  <mssgle:LineSegment
+                    End="-69.5,-26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-69.5,-26"
+                    Point2="-69.5,-30"
+                    Point3="-73.5,-30" />
+                  <mssgle:LineSegment
+                    End="-131.5,-30" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-77.5,1,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="263.5,278">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="263,358">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10,54"
+              Start="0,0"
+              End="10,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23"
+                    Point2="0,27"
+                    Point3="4,27" />
+                  <mssgle:LineSegment
+                    End="6,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6,27"
+                    Point2="10,27"
+                    Point3="10,31" />
+                  <mssgle:LineSegment
+                    End="10,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="&quot;\\\\groupad1.com\\data\\Conversions\\CollectionSystem\\eInvoice\\FI\\Karhut\\Virheet\\Karhuhistoria_verkkolaskuvirheet_&quot; +  (DT_WSTR,4)DATEPART(&quot;yyyy&quot;,GetDate()) + &quot;_&quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mm&quot;,GetDate()) ,2) + &quot;_&quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;dd&quot;,GetDate()),2) + &quot;_&quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;hh&quot;,GetDate()),2)+&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mi&quot;,GetDate()),2) + &#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;ss&quot;,GetDate()),2)+ &quot;.txt&quot;"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="966,120"
+          Id="9d6c9bba-2e73-42d9-9a8b-540d052d94fb"
+          TopLeft="446,205" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\MuodostaRaportti_1_txt">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\MuodostaRaportti_1_txt\Flat File Destination"
+          TopLeft="179,214" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\MuodostaRaportti_1_txt\OLE DB Source"
+          TopLeft="187,39" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\MuodostaRaportti_1_txt\Derived Column"
+          TopLeft="193,124" />
+        <EdgeLayout
+          Id="Package\MuodostaRaportti_1_txt.Paths[Derived Column Output]"
+          TopLeft="268.5,166">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MuodostaRaportti_1_txt.Paths[OLE DB Source Output]"
+          TopLeft="263,81">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,43"
+              Start="0,0"
+              End="8,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.5"
+                    Point2="0,21.5"
+                    Point3="4,21.5" />
+                  <mssgle:LineSegment
+                    End="4,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,21.5"
+                    Point2="8,21.5"
+                    Point3="8,25.5" />
+                  <mssgle:LineSegment
+                    End="8,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MuodostaRaportti_1_txt\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\MuodostaRaportti_2_csv">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\MuodostaRaportti_2_csv\Flat File Destination"
+          TopLeft="154,253" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\MuodostaRaportti_2_csv\Derived Column"
+          TopLeft="164,167" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\MuodostaRaportti_2_csv\OLE DB Source"
+          TopLeft="173,78" />
+        <EdgeLayout
+          Id="Package\MuodostaRaportti_2_csv.Paths[OLE DB Source Output]"
+          TopLeft="245.5,120">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MuodostaRaportti_2_csv.Paths[Derived Column Output]"
+          TopLeft="241.5,209">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="DB-ODS-CCS,5011"
+          ParentId="Package\MuodostaRaportti_2_csv"
+          FontInfo="{assembly:Null}"
+          Size="127,60"
+          Id="20145731-572f-49d4-86cc-6ee81f9ee61b"
+          TopLeft="488,153" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MuodostaRaportti_2_csv\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\MuodostaRaportti_3_txt">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\MuodostaRaportti_3_txt\Flat File Destination"
+          TopLeft="155,236" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\MuodostaRaportti_3_txt\Derived Column"
+          TopLeft="158,141" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\MuodostaRaportti_3_txt\OLE DB Source"
+          TopLeft="164,54" />
+        <EdgeLayout
+          Id="Package\MuodostaRaportti_3_txt.Paths[Derived Column Output]"
+          TopLeft="239,183">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MuodostaRaportti_3_txt.Paths[OLE DB Source Output]"
+          TopLeft="238,96">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MuodostaRaportti_3_txt\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\MuodostaRaportti_4_csv">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\MuodostaRaportti_4_csv\OLE DB Source"
+          TopLeft="129,46" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\MuodostaRaportti_4_csv\Flat File Destination"
+          TopLeft="118,168" />
+        <EdgeLayout
+          Id="Package\MuodostaRaportti_4_csv.Paths[OLE DB Source Output]"
+          TopLeft="205,88">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80"
+              Start="0,0"
+              End="0,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MuodostaRaportti_4_csv\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1126 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/28/2019 7:24:29 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LTR90NC4F2"
+  DTS:CreatorName="GROUPAD1\kaijahe"
+  DTS:DTSID="{7553B514-EA13-440E-893A-C3CEE40A07AD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1035"
+  DTS:ObjectName="VerkkolaskuKuluttajatUudet"
+  DTS:PackageType="5"
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{0387D145-7BCC-45ED-A26E-3040092985C3}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB-ODS-CCS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5FCDE63A-7357-419B-9DD5-8192DE9D90A8}"
+      DTS:ObjectName="DB-ODS-CCS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=lwsqltst012;Initial Catalog=CCS_OPERATIONAL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-VerkkolaskuKuluttajatUudet-{5FCDE63A-7357-419B-9DD5-8192DE9D90A8}DB-ODS-CCS;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OutputFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{57434593-280B-49A5-A8B0-50F0EEAF087C}"
+      DTS:ObjectName="OutputFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"\\\\intad1.com\\data\\Conversions\\CollectionSystem\\eInvoice\\FI\\Maksusuunnitelmat\\Uudet\\Elasku_uudet_" +  SUBSTRING((DT_WSTR,4)DATEPART("yyyy",GetDate()),3,2) + 
+RIGHT("0" + (DT_WSTR,2)DATEPART("mm",GetDate()) ,2) +
+RIGHT("0" + (DT_WSTR,2)DATEPART("dd",GetDate()),2) + 
+ "_" +RIGHT("0" + (DT_WSTR,2)DATEPART("hh",GetDate()),2)+
+RIGHT("0" + (DT_WSTR,2)DATEPART("mi",GetDate()),2) + 
+RIGHT("0" + (DT_WSTR,2)DATEPART("ss",GetDate()),2)+ ".txt"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1035"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\intad1.com\data\Conversions\CollectionSystem\eInvoice\FI\Maksusuunnitelmat\Uudet\Elasku_uudet_250306_142815.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 0"
+              DTS:DTSID="{150750EA-F3FA-4D1C-A7E3-05FF00ED685D}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F9D376D8-C416-49CC-A587-3732147A9F3E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RiviLkm">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\MuodostaTiedosto"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{49106B18-2A92-4F17-8C84-905A40FFEFFF}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MuodostaTiedosto"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\MuodostaTiedosto\LueKirjoittamattomat"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="LueKirjoittamattomat"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select UPPER(hetu) as hetu  from verkkolasku.kuluttajaUudet
+where listattu is null</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaTiedosto\LueKirjoittamattomat.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB-ODS-CCS]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB-ODS-CCS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Output].Columns[hetu]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Output].ExternalColumns[hetu]"
+                      length="15"
+                      lineageId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Output].Columns[hetu]"
+                      name="hetu"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Output].ExternalColumns[hetu]"
+                      dataType="wstr"
+                      length="15"
+                      name="hetu" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Error Output].Columns[hetu]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Error Output].Columns[hetu]"
+                      name="hetu" />
+                    <outputColumn
+                      refId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MuodostaTiedosto\MuodostaTiedosto"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1035"
+              name="MuodostaTiedosto"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MuodostaTiedosto\MuodostaTiedosto.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OutputFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[OutputFile]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MuodostaTiedosto\MuodostaTiedosto.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MuodostaTiedosto\MuodostaTiedosto.Inputs[Flat File Destination Input].Columns[hetu]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="hetu"
+                      externalMetadataColumnId="Package\MuodostaTiedosto\MuodostaTiedosto.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      lineageId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Output].Columns[hetu]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MuodostaTiedosto\MuodostaTiedosto.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 0" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MuodostaTiedosto.Paths[OLE DB Source Output]"
+              endId="Package\MuodostaTiedosto\MuodostaTiedosto.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\MuodostaTiedosto\LueKirjoittamattomat.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PaivitaListatut"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CC459FA7-7F85-490E-A683-8CE2ECF28287}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PaivitaListatut"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5FCDE63A-7357-419B-9DD5-8192DE9D90A8}"
+          SQLTask:SqlStatementSource="update verkkolasku.kuluttajaUudet&#xA;set listattu = getdate()&#xA;where listattu is null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TarkistaOnkoRiveja"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{20D432F4-05DD-4826-B522-7131DFA86C5B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TarkistaOnkoRiveja"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5FCDE63A-7357-419B-9DD5-8192DE9D90A8}"
+          SQLTask:SqlStatementSource="select count(*)  as rivilkm from verkkolasku.kuluttajaUudet&#xA;where listattu is null;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RiviLkm" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UudetHetut"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{11D10AB9-CB21-4025-B5AA-1B7B25A89F02}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UudetHetut"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\UudetHetut\InsertUudet"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="InsertUudet"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[VERKKOLASKU].[KuluttajaUudet]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\UudetHetut\InsertUudet.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB-ODS-CCS]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB-ODS-CCS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\UudetHetut\InsertUudet.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\UudetHetut\InsertUudet.Inputs[OLE DB Destination Input].Columns[hetu]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="hetu"
+                      externalMetadataColumnId="Package\UudetHetut\InsertUudet.Inputs[OLE DB Destination Input].ExternalColumns[Hetu]"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[hetu]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\InsertUudet.Inputs[OLE DB Destination Input].ExternalColumns[Hetu]"
+                      dataType="wstr"
+                      length="15"
+                      name="Hetu" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\InsertUudet.Inputs[OLE DB Destination Input].ExternalColumns[Listattu]"
+                      dataType="dbTimeStamp2"
+                      name="Listattu"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\UudetHetut\InsertUudet.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\UudetHetut\InsertUudet.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UudetHetut\InsertUudet.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\UudetHetut\InsertUudet.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\UudetHetut\InsertUudet.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\UudetHetut\InsertUudet.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\UudetHetut\SelectUudet"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SelectUudet"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select *,hetu from verkkolasku.kuluttaja_osoite vo
+where 
+tallennuspvm &gt; convert(date, 
+(select coalesce(max(listattu), '2019-10-08') from verkkolasku.kuluttajauudet )) 
+and 
+paattymispvm is null and 
+not exists 
+(select hetu from verkkolasku.kuluttaja_osoite vo2
+where vo2.paattymispvm &lt;&gt; vo2.tallennuspvm and vo.hetu = vo2.hetu and vo2.paattymispvm = vo.TallennusPvm)
+and not exists
+(select hetu from verkkolasku.KuluttajaUudet vo3
+where vo.hetu = vo3.hetu)
+
+/* select hetu from verkkolasku.kuluttaja_osoite vo
+where 
+tallennuspvm &gt; convert(date, getdate())  and paattymispvm is null and 
+not exists 
+(select hetu from verkkolasku.kuluttaja_osoite vo2
+where vo2.paattymispvm &lt;&gt; vo2.tallennuspvm and vo.hetu = vo2.hetu and vo2.paattymispvm = vo.TallennusPvm)
+and not exists
+(select hetu from verkkolasku.KuluttajaUudet vo3
+where vo.hetu = vo3.hetu) */</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\UudetHetut\SelectUudet.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB-ODS-CCS]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB-ODS-CCS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[hetu]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[hetu]"
+                      length="15"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[hetu]"
+                      name="hetu"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[OsoiteID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[OsoiteID]"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[OsoiteID]"
+                      name="OsoiteID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[HeTu]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[HeTu]"
+                      length="15"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[HeTu]"
+                      name="HeTu"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[TallennusPvm]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[TallennusPvm]"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[TallennusPvm]"
+                      name="TallennusPvm"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[VerkkolaskuOsoite]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[VerkkolaskuOsoite]"
+                      length="35"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[VerkkolaskuOsoite]"
+                      name="VerkkolaskuOsoite"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[ValittajanTunnus]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[ValittajanTunnus]"
+                      length="11"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[ValittajanTunnus]"
+                      name="ValittajanTunnus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[LaskutusAihe]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[LaskutusAihe]"
+                      length="20"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[LaskutusAihe]"
+                      name="LaskutusAihe"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[PalveluViite]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[PalveluViite]"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[PalveluViite]"
+                      name="PalveluViite"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[SanomaTyyppi]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[SanomaTyyppi]"
+                      length="10"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[SanomaTyyppi]"
+                      name="SanomaTyyppi"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[PaattymisPvm]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[PaattymisPvm]"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[PaattymisPvm]"
+                      name="PaattymisPvm"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[PaattymisSyy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[PaattymisSyy]"
+                      length="10"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[PaattymisSyy]"
+                      name="PaattymisSyy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Lopettaja]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Lopettaja]"
+                      length="10"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Lopettaja]"
+                      name="Lopettaja"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Lisatiedot]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Lisatiedot]"
+                      length="100"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Lisatiedot]"
+                      name="Lisatiedot"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Kayttopaiva]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Kayttopaiva]"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Kayttopaiva]"
+                      name="Kayttopaiva"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Cancelled]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Cancelled]"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Cancelled]"
+                      name="Cancelled"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Tiedosto]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Tiedosto]"
+                      length="200"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].Columns[Tiedosto]"
+                      name="Tiedosto"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[hetu]"
+                      dataType="wstr"
+                      length="15"
+                      name="hetu" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[OsoiteID]"
+                      dataType="i8"
+                      name="OsoiteID" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[HeTu]"
+                      dataType="wstr"
+                      length="15"
+                      name="HeTu" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[TallennusPvm]"
+                      dataType="dbTimeStamp2"
+                      name="TallennusPvm"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[VerkkolaskuOsoite]"
+                      dataType="wstr"
+                      length="35"
+                      name="VerkkolaskuOsoite" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[ValittajanTunnus]"
+                      dataType="wstr"
+                      length="11"
+                      name="ValittajanTunnus" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[LaskutusAihe]"
+                      dataType="wstr"
+                      length="20"
+                      name="LaskutusAihe" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[PalveluViite]"
+                      dataType="i8"
+                      name="PalveluViite" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[SanomaTyyppi]"
+                      dataType="wstr"
+                      length="10"
+                      name="SanomaTyyppi" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[PaattymisPvm]"
+                      dataType="dbTimeStamp2"
+                      name="PaattymisPvm"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[PaattymisSyy]"
+                      dataType="wstr"
+                      length="10"
+                      name="PaattymisSyy" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Lopettaja]"
+                      dataType="wstr"
+                      length="10"
+                      name="Lopettaja" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Lisatiedot]"
+                      dataType="wstr"
+                      length="100"
+                      name="Lisatiedot" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Kayttopaiva]"
+                      dataType="i4"
+                      name="Kayttopaiva" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Cancelled]"
+                      dataType="ui1"
+                      name="Cancelled" />
+                    <externalMetadataColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output].ExternalColumns[Tiedosto]"
+                      dataType="wstr"
+                      length="200"
+                      name="Tiedosto" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[OsoiteID]"
+                      dataType="i8"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[OsoiteID]"
+                      name="OsoiteID" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[HeTu]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[HeTu]"
+                      name="HeTu" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[TallennusPvm]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[TallennusPvm]"
+                      name="TallennusPvm"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[VerkkolaskuOsoite]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[VerkkolaskuOsoite]"
+                      name="VerkkolaskuOsoite" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[ValittajanTunnus]"
+                      dataType="wstr"
+                      length="11"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[ValittajanTunnus]"
+                      name="ValittajanTunnus" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[LaskutusAihe]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[LaskutusAihe]"
+                      name="LaskutusAihe" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[PalveluViite]"
+                      dataType="i8"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[PalveluViite]"
+                      name="PalveluViite" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[SanomaTyyppi]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[SanomaTyyppi]"
+                      name="SanomaTyyppi" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[PaattymisPvm]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[PaattymisPvm]"
+                      name="PaattymisPvm"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[PaattymisSyy]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[PaattymisSyy]"
+                      name="PaattymisSyy" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Lopettaja]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Lopettaja]"
+                      name="Lopettaja" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Lisatiedot]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Lisatiedot]"
+                      name="Lisatiedot" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Kayttopaiva]"
+                      dataType="i4"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Kayttopaiva]"
+                      name="Kayttopaiva" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Cancelled]"
+                      dataType="ui1"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Cancelled]"
+                      name="Cancelled" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Tiedosto]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[Tiedosto]"
+                      name="Tiedosto" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[hetu]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[hetu]"
+                      name="hetu" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\UudetHetut.Paths[OLE DB Source Output]"
+              endId="Package\UudetHetut\InsertUudet.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\UudetHetut\SelectUudet.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3269193A-E06C-48E8-88A9-C5E334B72C08}"
+      DTS:From="Package\UudetHetut"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\TarkistaOnkoRiveja" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{39A70C83-85A5-4752-9B2A-BA8D2CD348C0}"
+      DTS:From="Package\MuodostaTiedosto"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\PaivitaListatut" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{F2AA1133-3491-4228-8135-7F4320D652A7}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::RiviLkm] &gt; 0"
+      DTS:From="Package\TarkistaOnkoRiveja"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\MuodostaTiedosto" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="167,42"
+          Id="Package\MuodostaTiedosto"
+          TopLeft="165,200" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\PaivitaListatut"
+          TopLeft="172,274" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\TarkistaOnkoRiveja"
+          TopLeft="162,132" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\UudetHetut"
+          TopLeft="173,60" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="244.25,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="247,242">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="248.25,174">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,1.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\MuodostaTiedosto">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="167,42"
+          Id="Package\MuodostaTiedosto\MuodostaTiedosto"
+          TopLeft="193,188" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\MuodostaTiedosto\LueKirjoittamattomat"
+          TopLeft="193,83" />
+        <EdgeLayout
+          Id="Package\MuodostaTiedosto.Paths[OLE DB Source Output]"
+          TopLeft="279.75,125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63"
+              Start="0,0"
+              End="0,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MuodostaTiedosto\LueKirjoittamattomat">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\UudetHetut">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\UudetHetut\InsertUudet"
+          TopLeft="172,182" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\UudetHetut\SelectUudet"
+          TopLeft="175,72" />
+        <EdgeLayout
+          Id="Package\UudetHetut.Paths[OLE DB Source Output]"
+          TopLeft="242,114">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68"
+              Start="0,0"
+              End="0,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="DB-ODS-CCS.intad1.com,5011 production"
+          ParentId="Package\UudetHetut"
+          FontInfo="{assembly:Null}"
+          Size="250,60"
+          Id="825cce7a-7fb9-492f-b22b-4bb5317f7a60"
+          TopLeft="577,280" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\UudetHetut\InsertUudet">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\UudetHetut\SelectUudet">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

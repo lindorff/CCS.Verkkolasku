@@ -1,0 +1,458 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/21/2017 9:26:44 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LTR90NC4F2"
+  DTS:CreatorName="GROUPAD1\kaijahe"
+  DTS:DTSID="{D790646D-3C72-4A45-82E2-3AC08229F986}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1035"
+  DTS:ObjectName="VerkkolaskuUpdateSuosikit"
+  DTS:PackageType="5"
+  DTS:VersionBuild="34"
+  DTS:VersionGUID="{7073BCC3-E55B-4B74-A665-75AEECE5FA0E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6BDFB840-583B-4E98-AED9-7F8F0C4BD7F4}"
+      DTS:ObjectName="AG-ODS-PROD.CCS_OPERATIONAL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=lwsqltst012;Initial Catalog=CCS_OPERATIONAL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-VerkkolaskuUpdateSuosikit-{6BDFB840-583B-4E98-AED9-7F8F0C4BD7F4}AG-ODS-PROD.CCS_OPERATIONAL;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4A8A6BDA-2468-42F3-8CB0-F76EC5D3A1DF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="YTunnukset">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DBD1A360-4C8E-4F0F-B67A-2728763FB0E1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="YTunnus">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{F587760D-1AB5-4067-93EE-9BF57E041A1A}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{3BA0A574-D773-4E6A-8A7A-12DD071B497C}"
+        DTS:ObjectName="{3BA0A574-D773-4E6A-8A7A-12DD071B497C}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::YTunnukset" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\InsertNewRow"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C38E22EF-D504-4984-B04E-5B4AAB9CE513}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="InsertNewRow"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6BDFB840-583B-4E98-AED9-7F8F0C4BD7F4}"
+              SQLTask:SqlStatementSource="insert into verkkolasku.Yritykset_Karhut_valittu&#xA;([YTunnus]&#xA;           ,[AlkuPvm]&#xA;           ,[LoppuPvm]&#xA;           ,[Valittaja]&#xA;           ,[VastaanottoOsoite]&#xA;           ,[Lahde], valittajantunnus)&#xA;select ytunnus, getdate(), NULL, operaattori, vastaanottoosoite, '01' , valittajantunnus from verkkolaskutemp.valitutapu va&#xA;where va.ytunnus = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::YTunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\UpdateOldRow"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{968F460A-9F08-407A-B3A7-94A900E2F078}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="UpdateOldRow"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6BDFB840-583B-4E98-AED9-7F8F0C4BD7F4}"
+              SQLTask:SqlStatementSource="update [CCS_OPERATIONAL].[VERKKOLASKU].[Yritykset_Karhut_Valittu]&#xA;set loppupvm = getdate()&#xA;where ytunnus = ? and loppupvm is null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::YTunnus"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{D66BF5FC-1119-4DE3-9228-0F9FF331332D}"
+          DTS:From="Package\Foreach Loop Container\UpdateOldRow"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\InsertNewRow" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{6C87D60F-DF9E-4408-AD4D-9D2595666ABE}"
+          DTS:ObjectName="{6C87D60F-DF9E-4408-AD4D-9D2595666ABE}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::YTunnus" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\InsertIfNotExist"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F33B6629-653B-46BB-B7EB-B743164CE36D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="InsertIfNotExist"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6BDFB840-583B-4E98-AED9-7F8F0C4BD7F4}"
+          SQLTask:SqlStatementSource="insert into verkkolasku.Yritykset_Karhut_valittu&#xA;([YTunnus]&#xA;           ,[AlkuPvm]&#xA;           ,[LoppuPvm]&#xA;           ,[Valittaja]&#xA;           ,[VastaanottoOsoite]&#xA;           ,[Lahde], valittajantunnus)&#xA;select ytunnus, getdate(), NULL, operaattori, vastaanottoosoite, '01', valittajantunnus from verkkolaskutemp.valitutapu va&#xA;where va.ytunnus not in&#xA;(select vk.ytunnus from verkkolasku.Yritykset_Karhut_valittu vk&#xA;where vk.LoppuPvm is null)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SelectModified"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{B0F6AC86-863D-41EC-B981-72DA4989706B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SelectModified"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6BDFB840-583B-4E98-AED9-7F8F0C4BD7F4}"
+          SQLTask:SqlStatementSource="SELECT distinct(ytunnus) FROM (&#xA;SELECT ytunnus, operaattori FROM verkkolaskutemp.yritykset2 y2 &#xA;WHERE&#xA;ytunnus not IN (select top 1 a.ytunnus from verkkolaskutemp.valitutapu a&#xA;where a.ytunnus = y2.ytunnus)  and&#xA; y2.vastaanottaa &lt;&gt; 'Ei' and y2.lahetyslupa &lt;&gt; 'Ei'&#xA;GROUP BY ytunnus, operaattori &#xA;) x&#xA;GROUP BY ytunnus&#xA;HAVING COUNT(*) &gt; 1"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::YTunnukset" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SelectRowsWhichAreModified"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B0F3BA0E-3290-4BF5-B1E5-4E952B97194D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SelectRowsWhichAreModified"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6BDFB840-583B-4E98-AED9-7F8F0C4BD7F4}"
+          SQLTask:SqlStatementSource="select vk.ytunnus &#xA;from verkkolasku.Yritykset_Karhut_valittu vk&#xA;join verkkolaskutemp.valitutapu va on vk.ytunnus = va.ytunnus&#xA;where (vk.vastaanottoosoite &lt;&gt; va.vastaanottoosoite &#xA;or vk.Valittajantunnus &lt;&gt; va.ValittajanTunnus) and loppupvm is null"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::YTunnukset" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateEndDateIfDeleted"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0482EB8D-71A4-4CE7-849C-1D50C00AE156}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateEndDateIfDeleted"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6BDFB840-583B-4E98-AED9-7F8F0C4BD7F4}"
+          SQLTask:SqlStatementSource="update verkkolasku.Yritykset_Karhut_valittu&#xA;set loppupvm = getdate()&#xA;where ytunnus not in&#xA;(select vk.ytunnus from verkkolaskutemp.valitutapu vk&#xA;)&#xA;and loppupvm is null&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{55ADFE63-BA1C-45B3-8F89-4EEBB4B5865F}"
+      DTS:From="Package\InsertIfNotExist"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\UpdateEndDateIfDeleted" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DF6A93EE-9BDE-4979-86FC-C1042179C8DE}"
+      DTS:From="Package\UpdateEndDateIfDeleted"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\SelectRowsWhichAreModified" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{ADFBE24D-4E07-4450-8EF9-27AABFD207DD}"
+      DTS:From="Package\SelectRowsWhichAreModified"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\SelectModified" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{8FEE5F9A-053A-476F-8EBA-B632B90CF389}"
+      DTS:From="Package\SelectModified"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Foreach Loop Container\InsertNewRow"
+          TopLeft="63.2000024523054,97.7411784696743" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Foreach Loop Container\UpdateOldRow"
+          TopLeft="56.9142880595461,21.6470601705532" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="134.657145255926,63.2470601705532">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.4941182991211"
+              Start="0,0"
+              End="0,26.9941182991211">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.9941182991211" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="277,203"
+          Size="277,246"
+          Id="Package\Foreach Loop Container"
+          TopLeft="139.142858184114,439.905884909712" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\InsertIfNotExist"
+          TopLeft="194.142859137788,79.7176477280455" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\SelectModified"
+          TopLeft="199.428573326189,353.952942309" />
+        <NodeLayout
+          Size="218,42"
+          Id="Package\SelectRowsWhichAreModified"
+          TopLeft="176.28571595951,239.823531033341" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\UpdateEndDateIfDeleted"
+          TopLeft="184.428573258069,157.035295164379" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="279.485716197929,121.317647728046">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.7176474363334"
+              Start="0,0"
+              End="0,28.2176474363334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.2176474363334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="284.10714460879,199.035295164379">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.788235868962"
+              Start="0,0"
+              End="0,33.288235868962">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.288235868962" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="283.35714464285,281.823531033341">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72.129411275659"
+              Start="0,0"
+              End="0,64.629411275659">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.629411275659" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="279.535715755151,395.952942309">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.952942600712"
+              Start="0,0"
+              End="0,36.452942600712">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.452942600712" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="insert into verkkolasku.Yritykset_Karhut_valittu&#xA;([YTunnus]&#xA;           ,[AlkuPvm]&#xA;           ,[LoppuPvm]&#xA;           ,[Valittaja]&#xA;           ,[VastaanottoOsoite]&#xA;           ,[Lahde], valittajantunnus)&#xA;select ytunnus, getdate(), NULL, operaattori, vastaanottoosoite, '01', valittajantunnus from verkkolaskutemp.valitutapu va&#xA;where va.ytunnus not in&#xA;(select vk.ytunnus from verkkolasku.Yritykset_Karhut_valittu vk)"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="667,184"
+          Id="65fc9e22-7b0d-41f7-8a53-680f26fb9055"
+          TopLeft="427,40" />
+        <AnnotationLayout
+          Text="update verkkolasku.Yritykset_Karhut_valittu&#xA;set loppupvm = getdate()&#xA;where ytunnus not in&#xA;(select vk.ytunnus from verkkolaskutemp.valitutapu vk)"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="320,88"
+          Id="0c756128-f67b-4c72-b2b4-6e7a5c007843"
+          TopLeft="459,239" />
+        <AnnotationLayout
+          Text="select vk.ytunnus &#xA;from verkkolasku.Yritykset_Karhut_valittu vk&#xA;join verkkolaskutemp.valitutapu va on vk.ytunnus = va.ytunnus&#xA;where vk.vastaanottoosoite &lt;&gt; va.vastaanottoosoite &#xA;or vk.Valittajantunnus &lt;&gt; va.ValittajanTunnus"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="362,104"
+          Id="ef6390d0-8df8-498b-96e9-319d0f0a8161"
+          TopLeft="533,352" />
+        <AnnotationLayout
+          Text="update [CCS_OPERATIONAL].[VERKKOLASKU].[Yritykset_Karhut_Valittu]&#xA;set loppupvm = getdate()&#xA;where ytunnus = ?"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="405,72"
+          Id="99d2b8eb-47be-4c2b-8999-76903a97f2b0"
+          TopLeft="559,537" />
+        <AnnotationLayout
+          Text="insert into verkkolasku.Yritykset_Karhut_valittu&#xA;([YTunnus]&#xA;           ,[AlkuPvm]&#xA;           ,[LoppuPvm]&#xA;           ,[Valittaja]&#xA;           ,[VastaanottoOsoite]&#xA;           ,[Lahde], valittajantunnus)&#xA;select ytunnus, getdate(), NULL, operaattori, vastaanottoosoite, '01' , valittajantunnus from verkkolaskutemp.valitutapu va&#xA;where va.ytunnus = ?"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="670,168"
+          Id="bd42f95a-c55d-42bc-8152-71bc22fce48d"
+          TopLeft="446,637" />
+        <AnnotationLayout
+          Text="db-ods-ccs.intad1.com,5011"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="178,60"
+          Id="a5211c8d-df9d-46c5-bc78-7ef7ba9ee7f0"
+          TopLeft="922,260" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
