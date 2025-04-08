@@ -5,33 +5,33 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="LTR900KXKH"
   DTS:CreatorName="GROUPAD1\kaijahe"
-  DTS:DTSID="{8E1CC51C-03D5-4C3D-91AB-79909E4C863D}"
+  DTS:DTSID="{D643F60F-07C7-4889-AC31-974E3C4E97A0}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1035"
   DTS:ObjectName="VerkkolaskuImport"
   DTS:PackageType="5"
-  DTS:VersionBuild="101"
-  DTS:VersionGUID="{F98FA69A-716F-4579-9B98-1F32C91A378D}">
+  DTS:VersionBuild="126"
+  DTS:VersionGUID="{427741BD-8BCC-4469-B104-3623C6A8A9EA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[AG-ODS-PROD.CCS_OPERATIONAL]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{3117858B-37BD-407E-B3EE-86938C3152B7}"
+      DTS:DTSID="{35FF24E0-3A62-45C8-8DA0-B9C6FEA0BE88}"
       DTS:ObjectName="AG-ODS-PROD.CCS_OPERATIONAL">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=lwsqltst012;Initial Catalog=CCS_OPERATIONAL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-VerkkolaskuImport-{3117858B-37BD-407E-B3EE-86938C3152B7}AG-ODS-PROD.CCS_OPERATIONAL;" />
+          DTS:ConnectionString="Data Source=db-ods-prod,5014;Initial Catalog=CCS_OPERATIONAL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-VerkkolaskuImport-{35FF24E0-3A62-45C8-8DA0-B9C6FEA0BE88}AG-ODS-PROD.CCS_OPERATIONAL;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[FI422HELSDB012.PaymentToolMemoTest_Jemma]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{4A04A30C-AF74-4DF6-9232-37B54C3F7699}"
+      DTS:DTSID="{6EDFE7F2-5F65-4984-8D2C-591120952F60}"
       DTS:ObjectName="FI422HELSDB012.PaymentToolMemoTest_Jemma">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -43,7 +43,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[InputFile]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{61658136-3AC2-4476-9A9A-5840C40164C2}"
+      DTS:DTSID="{4B54D973-65E8-40F6-B31F-B88921210EC6}"
       DTS:ObjectName="InputFile">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
@@ -64,7 +64,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Yrityksen nimi&quot;"
-              DTS:DTSID="{ADC2C37D-D009-4D39-A211-D6164653A2BB}"
+              DTS:DTSID="{585552CC-FAA4-4ECD-B217-8E9871909A6A}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -73,7 +73,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Y-tunnus&quot;"
-              DTS:DTSID="{589F7C2F-BB87-4DC6-9849-A8DC9D187E17}"
+              DTS:DTSID="{2229C532-79FA-410D-9A13-86BA9620E209}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -82,7 +82,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Operaattori&quot;"
-              DTS:DTSID="{2D090B83-52BF-4B44-89CA-AE49783254E7}"
+              DTS:DTSID="{7C79DF00-7CE3-4281-830F-FC0ED880FC10}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -91,7 +91,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Lähettää&quot;"
-              DTS:DTSID="{30BDB929-53A2-4BB6-AB51-CBDD08AD23B1}"
+              DTS:DTSID="{D05EF759-D921-4389-AA2A-26BD1CC8B104}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -100,7 +100,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Vastaanottaa&quot;"
-              DTS:DTSID="{54574B75-1333-494F-9645-E9E7FA3E1A78}"
+              DTS:DTSID="{3F13878C-B5C7-4BC8-B2DC-8F189C2D0499}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -109,7 +109,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Vastaanotto-osoite&quot;"
-              DTS:DTSID="{EF7BA457-91BF-46A7-9543-3F865B9BEC4C}"
+              DTS:DTSID="{44F1F446-7478-4192-AFAB-C4503FBA29CE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -118,7 +118,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Muokattu&quot;"
-              DTS:DTSID="{A9CDB1BF-017B-4333-B63B-E84D4C336775}"
+              DTS:DTSID="{6131183B-8D53-401C-9382-C2C4CF5CEFDE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -127,7 +127,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Välittäjän tunnus&quot;"
-              DTS:DTSID="{D238FF9D-8698-4DCA-B1C9-0D98B1A636A5}"
+              DTS:DTSID="{E5378937-934C-4F8B-8416-1F7A955BD49B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -136,7 +136,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Lähetyslupa&quot;"
-              DTS:DTSID="{A5CDCA3C-EFFD-4046-87D1-19B437B055BA}"
+              DTS:DTSID="{624C724E-AFE0-4372-B281-E4E53B0E472D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -145,7 +145,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;OVT-tunnus&quot;"
-              DTS:DTSID="{6C5EF221-D812-4179-98EF-2DCF1A59B827}"
+              DTS:DTSID="{7E6DEFE7-792B-4E7D-B824-AB6B18F5FE75}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -154,7 +154,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;Esitystavat&quot;"
-              DTS:DTSID="{FEC3DFEC-9174-4150-AD6E-3C16C642147A}"
+              DTS:DTSID="{0827EE88-7AA2-4FC2-B109-FAA727015F2A}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -163,7 +163,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[InputFile_new]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{5756B50E-0E9B-4CE1-B160-8256E3912B39}"
+      DTS:DTSID="{1D4B74FD-EA32-4C64-8D21-F11414757906}"
       DTS:ObjectName="InputFile_new">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
@@ -184,7 +184,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Yrityksen nimi"
-              DTS:DTSID="{B2C7332D-97F9-45DE-A8B8-F0E34623653B}"
+              DTS:DTSID="{7AB989CB-6B4F-45BE-8B26-B5F9942D8D3C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -193,7 +193,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Y-tunnus"
-              DTS:DTSID="{0176E28A-EF5E-4815-8D9B-C476FE86B0B2}"
+              DTS:DTSID="{6867B924-8DA9-4EF2-9066-5A0E92CF77B3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -202,7 +202,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Operaattori"
-              DTS:DTSID="{C452F2A3-FAA3-416A-BAD9-7BEFD07058E4}"
+              DTS:DTSID="{9580156B-CA08-45AD-B9C5-4DCF9A56FCB4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -211,7 +211,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Lähettää"
-              DTS:DTSID="{37AF1A50-D292-4A5F-9C45-E5259B4E3F4C}"
+              DTS:DTSID="{EAA29108-63C5-4F47-9293-D220483586D8}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -220,7 +220,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Vastaanottaa"
-              DTS:DTSID="{56FBA21A-84C2-4B3F-B8C1-D1A7730F2A55}"
+              DTS:DTSID="{492A85F1-0052-415D-AF3E-3DFFC80A8B9E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -229,7 +229,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Vastaanotto-osoite"
-              DTS:DTSID="{48373993-700B-4B55-A56A-92902DA42F54}"
+              DTS:DTSID="{3BF913A7-8D99-4FAF-B2EA-0BDD4B761AE9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -238,7 +238,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Muokattu"
-              DTS:DTSID="{51C2A3B5-06F2-432A-95DA-26706CA0DD69}"
+              DTS:DTSID="{FC0F6B11-C835-4CC4-83CB-B6E2DC507581}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -247,7 +247,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Välittäjän tunnus"
-              DTS:DTSID="{44520114-2B57-40D0-A711-5FDD53A82A9C}"
+              DTS:DTSID="{5F3CD23F-48D9-47CF-B2BB-CF52D8F3FEE1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -256,7 +256,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="OVT-tunnus"
-              DTS:DTSID="{ADAC609B-E4DE-4D14-A2C2-6976755C357B}"
+              DTS:DTSID="{75A0CC2C-A310-4096-9434-A6EDC8155A2B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -265,7 +265,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="LiitteidenVastOtto"
-              DTS:DTSID="{920E5EDE-B733-4BBF-80E0-EDB5BDE01D02}"
+              DTS:DTSID="{81F88E08-C3B5-492C-9371-2E06818B84EC}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -274,7 +274,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[InputFile_new2]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{7BA01102-DF69-479D-927B-91B3D9C7B88B}"
+      DTS:DTSID="{6A5DEA63-DC97-418E-A5C7-8B64909B8C16}"
       DTS:ObjectName="InputFile_new2">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
@@ -295,7 +295,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Yrityksen nimi"
-              DTS:DTSID="{9B91A3E1-9BDE-408F-BB00-4EFD3A9AD7CD}"
+              DTS:DTSID="{9E920D89-F687-49E9-A78E-588AC1C06A8C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -304,7 +304,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Y-tunnus"
-              DTS:DTSID="{7B23C466-905E-4195-9D85-103D659595AF}"
+              DTS:DTSID="{1D674912-BF3F-4399-BF52-79AA7EB7EE05}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -313,7 +313,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Operaattori"
-              DTS:DTSID="{8080BEBE-E87A-474C-9DAE-83B274ACC92D}"
+              DTS:DTSID="{262B5465-2C1B-4974-AD6E-3047BBE7E4B8}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -322,7 +322,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Lähettää"
-              DTS:DTSID="{C9F3D1E0-8314-486A-9AAF-E14DB907DD7E}"
+              DTS:DTSID="{12B36665-3F79-4B99-8E9B-56014F66BA1D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -331,7 +331,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Vastaanottaa"
-              DTS:DTSID="{F58A3778-6D05-442B-B1BB-78ECC63179E5}"
+              DTS:DTSID="{F2AAC535-BEFB-4F9F-B391-167E4D5FE20B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -340,7 +340,16 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Vastaanotto-osoite"
-              DTS:DTSID="{A042DA35-EB84-4558-BE0B-D3DCF2AB5766}"
+              DTS:DTSID="{6A4C4F24-6C4A-43A1-ADEA-427D7214D2C7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ICD-koodi"
+              DTS:DTSID="{94EAB57F-5E4C-429C-BCFA-AEE0A04761BA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -349,7 +358,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Vastaanotto-osoitteen nimi"
-              DTS:DTSID="{C48E7EAE-A52C-40A3-AB63-0134BA7692E4}"
+              DTS:DTSID="{7BD5AC7A-0DF4-4013-A50E-725AE9A31667}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -358,7 +367,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Muokattu"
-              DTS:DTSID="{DEB45E98-5EE0-4247-B950-80F4F5F6E4E3}"
+              DTS:DTSID="{24988117-C4F6-4F75-90AE-701BF22C8CA9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -367,7 +376,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Välittäjän tunnus"
-              DTS:DTSID="{1EAEFB6B-1A21-44A7-859B-30A5D3A8300E}"
+              DTS:DTSID="{9169ACED-2E0F-4318-A861-CC8F29B6EDC4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -376,7 +385,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="OVT-tunnus"
-              DTS:DTSID="{072FDADC-76B3-4CFD-9017-6E6BBE4DADDD}"
+              DTS:DTSID="{93FBFC3B-A7D5-4BEA-AB2D-BF7E240273AC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -385,7 +394,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Ensisijainen vastaanotto-osoite"
-              DTS:DTSID="{7F9E698B-EB0C-430F-884A-B806649CFD30}"
+              DTS:DTSID="{F3CF72FF-F11F-41AB-9110-563C4C111871}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -394,7 +403,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Liitteiden vastaanotto"
-              DTS:DTSID="{501A787A-2808-4AD4-B5D6-856436D0AED5}"
+              DTS:DTSID="{511D758F-6817-4F11-8C31-F6F1386F5D6F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -403,7 +412,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Julkinen"
-              DTS:DTSID="{607D2785-6D5C-483D-8F9C-3AA85D18E39A}"
+              DTS:DTSID="{572C6227-8AF6-452D-AE1F-9C0EE85FE12B}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -413,7 +422,7 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{C84BBB3E-0F70-4073-A3BF-5FFCE46FD438}"
+      DTS:DTSID="{F10535EA-7E6E-4504-888B-2E1772043511}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="FileName">
@@ -423,7 +432,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{30958FA9-E171-41E7-9369-A5AC33A8AC3C}"
+      DTS:DTSID="{CE18EDF4-09B3-4142-BBEB-DD571D5A8D51}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="RowId">
@@ -433,7 +442,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{F1F3ACB5-B723-40A6-8597-80E3CBB1CB19}"
+      DTS:DTSID="{CB0EB077-9C21-4E9D-9A42-F25E124A838F}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="RowIds">
@@ -443,7 +452,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{F2CADA3E-6E92-4826-B32B-D10020B557C8}"
+      DTS:DTSID="{CF0C8657-0422-4651-AB5C-75A79994AEE2}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowNumber">
@@ -453,17 +462,34 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
+      DTS:refId="Package\delete empty ytunnus"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{da7e9a43-cfca-4263-be53-b45d7692f891}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="delete empty ytunnus"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{35FF24E0-3A62-45C8-8DA0-B9C6FEA0BE88}"
+          SQLTask:SqlStatementSource="delete [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[Yritykset2]&#xA;  where YTunnus = ''" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Foreach Loop Container"
       DTS:CreationName="STOCK:FOREACHLOOP"
       DTS:Description="Foreach Loop Container"
-      DTS:DTSID="{2FDFECDB-D8F5-4FD1-8F53-CE20BCC200F5}"
+      DTS:DTSID="{1B79F02D-8A1F-4CC4-907E-E7F45C1E32D7}"
       DTS:ExecutableType="STOCK:FOREACHLOOP"
       DTS:LocaleID="-1"
       DTS:ObjectName="Foreach Loop Container">
       <DTS:ForEachEnumerator
         DTS:CreationName="Microsoft.ForEachFileEnumerator"
-        DTS:DTSID="{6618BA51-0573-494B-8892-D5DFBA890A7F}"
-        DTS:ObjectName="{6618BA51-0573-494B-8892-D5DFBA890A7F}">
+        DTS:DTSID="{85C94343-809C-4EEF-8C53-AE083AD45619}"
+        DTS:ObjectName="{85C94343-809C-4EEF-8C53-AE083AD45619}">
         <DTS:ObjectData>
           <ForEachFileEnumeratorProperties>
             <FEFEProperty
@@ -483,7 +509,7 @@
           DTS:refId="Package\Foreach Loop Container\InputToTemp"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{C6190253-DBC7-4FB7-B2E4-0D91C79F4C0D}"
+          DTS:DTSID="{8CE7F9E1-A1D4-40CA-817E-897253A14E4E}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
           DTS:ObjectName="InputToTemp"
@@ -901,6 +927,27 @@
                               name="UseBinaryFormat">false</property>
                           </properties>
                         </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[ICD-koodi]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ICD-koodi]"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].Columns[ICD-koodi]"
+                          name="ICD-koodi"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -969,6 +1016,11 @@
                           dataType="wstr"
                           length="50"
                           name="Julkinen" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\InputToTemp\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ICD-koodi]"
+                          dataType="wstr"
+                          length="50"
+                          name="ICD-koodi" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -1366,8 +1418,8 @@
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{83E24B8C-FA7E-4B98-A432-7FA6E7057DC1}"
-          DTS:ObjectName="{83E24B8C-FA7E-4B98-A432-7FA6E7057DC1}"
+          DTS:DTSID="{1A3A068B-EDBC-4D41-8298-4EA61979514B}"
+          DTS:ObjectName="{1A3A068B-EDBC-4D41-8298-4EA61979514B}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::FileName" />
       </DTS:ForEachVariableMappings>
@@ -1376,7 +1428,7 @@
       DTS:refId="Package\RenameSchema"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{D3167F33-72A5-441F-8566-78CD9AFB15EA}"
+      DTS:DTSID="{E74F5470-AB4E-41D2-8FE8-FB30952A7DEC}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="RenameSchema"
@@ -1385,7 +1437,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{3117858B-37BD-407E-B3EE-86938C3152B7}"
+          SQLTask:Connection="{35FF24E0-3A62-45C8-8DA0-B9C6FEA0BE88}"
           SQLTask:SqlStatementSource="ALTER SCHEMA [VERKKOLASKUTEMP2] TRANSFER [VERKKOLASKU].Yritykset   ;&#xA;/*&#xA;ALTER SCHEMA [VERKKOLASKUTEMP2] TRANSFER [VERKKOLASKU].YrityksetVastaanOttoOsoitteet   ;&#xA;*/&#xA;ALTER SCHEMA [VERKKOLASKU] TRANSFER [VERKKOLASKUTEMP].Yritykset   ;&#xA;/*&#xA;ALTER SCHEMA [VERKKOLASKU] TRANSFER [VERKKOLASKUTEMP].YrityksetVastaanOttoOsoitteet   ;&#xA;*/&#xA;ALTER SCHEMA [VERKKOLASKUTEMP] TRANSFER [VERKKOLASKUTEMP2].Yritykset   ;&#xA;/*&#xA;ALTER SCHEMA [VERKKOLASKUTEMP] TRANSFER [VERKKOLASKUTEMP2].YrityksetVastaanOttoOsoitteet   ;&#xA;*/" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -1393,7 +1445,7 @@
       DTS:refId="Package\TrunacateTempTables"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{4B54E1C6-45D3-4142-95BC-3D9E0B597E16}"
+      DTS:DTSID="{59C2DD6F-A12F-4F52-9679-66D60804BCD2}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TrunacateTempTables"
@@ -1402,7 +1454,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{3117858B-37BD-407E-B3EE-86938C3152B7}"
+          SQLTask:Connection="{35FF24E0-3A62-45C8-8DA0-B9C6FEA0BE88}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE [VERKKOLASKUTEMP].[Yritykset];&#xA;TRUNCATE TABLE [VERKKOLASKUTEMP].[Yritykset2];&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -1410,7 +1462,7 @@
       DTS:refId="Package\YrityksetToYritykset2"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{2FA958BE-38AE-4F12-B3FE-014A6934316F}"
+      DTS:DTSID="{180CD370-DCE6-4A2F-88DC-00D5277AA3B7}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="YrityksetToYritykset2"
@@ -1419,7 +1471,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{3117858B-37BD-407E-B3EE-86938C3152B7}"
+          SQLTask:Connection="{35FF24E0-3A62-45C8-8DA0-B9C6FEA0BE88}"
           SQLTask:SqlStatementSource="INSERT INTO [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[Yritykset]&#xA;           ([YrityksenNimi]&#xA;           ,[YTunnus]&#xA;           ,[Operaattori]&#xA;           ,[Lahettaa]&#xA;           ,[Vastaanottaa]&#xA;           ,VastaanottoOsoite&#xA;           ,[Muokattu]&#xA;           ,[ValittajanTunnus]&#xA;           ,[Lahetyslupa]&#xA;           ,[OVTTunnus]&#xA;           ,[Esitystavat]&#xA;,VastaanottaaLiitteita&#xA;,Ensisijainen&#xA;           ,YritysRowId)&#xA;select YrityksenNimi&#xA;           ,YTunnus&#xA;           ,Operaattori&#xA;           ,Lahettaa&#xA;           ,Vastaanottaa&#xA;           ,VastaanottoOsoite&#xA;           ,Muokattu&#xA;           ,ValittajanTunnus&#xA;           ,Lahetyslupa&#xA;           ,OVTTunnus&#xA;          , Esitystavat&#xA;,VastaanottaaLiitteita&#xA;,Ensisijainen&#xA;           ,YritysRowId&#x9;&#x9;   &#xA;from  [CCS_OPERATIONAL].[VERKKOLASKUTEMP].[Yritykset2]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -1428,7 +1480,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{5174BB5B-7632-4323-A0E8-2E672971EC89}"
+      DTS:DTSID="{4EA8E6BD-8FBA-442F-9FB9-0064AAC750B1}"
       DTS:From="Package\TrunacateTempTables"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -1436,15 +1488,23 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{917E2B4E-918B-4B86-8B8C-266E497DC6DD}"
+      DTS:DTSID="{E6C96254-4C8B-4390-A287-8FAD38142702}"
       DTS:From="Package\Foreach Loop Container"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
+      DTS:To="Package\delete empty ytunnus" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{95396FBF-C592-47B8-9E1B-A27579D86425}"
+      DTS:From="Package\delete empty ytunnus"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
       DTS:To="Package\YrityksetToYritykset2" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{B934CF16-1C68-471C-B702-69242D99D89C}"
+      DTS:DTSID="{0645D7CE-6CE4-4CDA-9EB9-92C8821F9774}"
       DTS:From="Package\YrityksetToYritykset2"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
@@ -1461,7 +1521,7 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="145,42"
           Id="Package\Foreach Loop Container\InputToTemp"
@@ -1472,77 +1532,29 @@
           PanelSize="241,82"
           Size="241,125"
           Id="Package\Foreach Loop Container"
-          TopLeft="174.285713098487,76.6588244474467" />
+          TopLeft="172.285713098487,76.6588244474467" />
         <NodeLayout
-          Size="156,42"
+          Size="161,42"
           Id="Package\RenameSchema"
-          TopLeft="207.714286084078,369.25882984412" />
+          TopLeft="204.714286084078,422.25882984412" />
         <NodeLayout
           Size="186,42"
           Id="Package\TrunacateTempTables"
-          TopLeft="195.285715414553,10.3882345562575" />
-        <NodeLayout
-          Size="179,42"
-          Id="Package\YrityksetToYritykset2"
-          TopLeft="203.285714801477,267.788244328614" />
+          TopLeft="205.285715414553,11.3882345562575" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="291.53571425652,52.3882345562575">
+          TopLeft="295.53571425652,53.3882345562575">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,24.2705898911892"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.2705898911892"
               Start="0,0"
-              End="0,16.7705898911892">
+              End="0,15.7705898911892">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.7705898911892" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="293.785713949982,201.658824447447">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,66.1294198811673"
-              Start="0,0"
-              End="0,58.6294198811673">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,58.6294198811673" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="289.250000442777,309.788244328614">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,59.470585515506"
-              Start="0,0"
-              End="0,51.970585515506">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,51.970585515506" />
+                    End="0,15.7705898911892" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1552,12 +1564,105 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <AnnotationLayout
-          Text="\\groupad1.com\data\DataMining\FI\VerkkoLasku&#xA;c:\temp"
+          Text="\\intad1.com\data\DataMining\FI\VerkkoLasku&#xA;c:\temp"
           ParentId="Package"
-          FontInfo="{x:Null}"
-          Size="296,56"
+          FontInfo="{assembly:Null}"
+          Size="275,56"
           Id="f051dc19-a44f-4c96-9d52-a1d8fb1d8a6b"
-          TopLeft="464,142" />
+          TopLeft="445,115" />
+        <AnnotationLayout
+          Text="Test LWSQLTST012&#xD;&#xA;Prod DB-ODS-PROD,5014"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="166,56"
+          Id="b70cd03c-d2d6-4cb6-a9d0-13ee68346307"
+          TopLeft="166,467" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\delete empty ytunnus"
+          TopLeft="193,235" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="292.785713098487,201.658824447447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8.28571309848701,33.3411755525533"
+              Start="0,0"
+              End="-8.28571309848701,25.8411755525533">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.6705877762766" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.6705877762766"
+                    Point2="0,16.6705877762766"
+                    Point3="-4,16.6705877762766" />
+                  <mssgle:LineSegment
+                    End="-4.28571309848701,16.6705877762766" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.28571309848701,16.6705877762766"
+                    Point2="-8.28571309848701,16.6705877762766"
+                    Point3="-8.28571309848701,20.6705877762766" />
+                  <mssgle:LineSegment
+                    End="-8.28571309848701,25.8411755525533" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="179,42"
+          Id="Package\YrityksetToYritykset2"
+          TopLeft="200.285714801477,331.788244328614" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="287.500000442777,373.788244328614">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.470585515506"
+              Start="0,0"
+              End="0,40.970585515506">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.970585515506" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="287.142857400739,277">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54.788244328614"
+              Start="0,0"
+              End="0,47.288244328614">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.288244328614" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1565,15 +1670,11 @@
     design-time-name="Package\Foreach Loop Container\InputToTemp">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="170,42"
+          Size="177,42"
           Id="Package\Foreach Loop Container\InputToTemp\OLE DB Destination"
           TopLeft="159,272" />
-        <NodeLayout
-          Size="166,42"
-          Id="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi"
-          TopLeft="159,196" />
         <NodeLayout
           Size="174,42"
           Id="Package\Foreach Loop Container\InputToTemp\FirstAndLastColumn"
@@ -1582,12 +1683,16 @@
           Size="152,42"
           Id="Package\Foreach Loop Container\InputToTemp\Flat File Source"
           TopLeft="153,45" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Foreach Loop Container\InputToTemp\TrimYrityksenNimi"
+          TopLeft="159,196" />
         <EdgeLayout
           Id="Package\Foreach Loop Container\InputToTemp.Paths[Flat File Source Output]"
           TopLeft="229,87">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="15,35"
               Start="0,0"
               End="15,27.5">
@@ -1621,7 +1726,7 @@
           TopLeft="243,164">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,32"
               Start="0,0"
               End="0,24.5">
@@ -1640,18 +1745,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Foreach Loop Container\InputToTemp.Paths[Derived Column Output]"
-          TopLeft="243.2,237.6">
+          TopLeft="244.75,238">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,34.4"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
               Start="0,0"
-              End="0,26.9">
+              End="0,26.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.9" />
+                    End="0,26.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1663,7 +1768,7 @@
         <AnnotationLayout
           Text="11§"
           ParentId="Package\Foreach Loop Container\InputToTemp"
-          FontInfo="{x:Null}"
+          FontInfo="{assembly:Null}"
           Size="47,40"
           Id="74f25d82-505c-48f8-a899-5d3ef78fc052"
           TopLeft="1637,5.5" />
